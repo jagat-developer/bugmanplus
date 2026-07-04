@@ -43,7 +43,7 @@ const services = [
     shortTitle: "Bed Bugs",
     image: serviceImages.bedBug,
     alt: "Detailed service photo for bed bug control",
-    demand: "Highest demand",
+    label: "Interior service",
     season: "All year",
     covers: ["Bed bugs", "Bat bugs", "Biting pest inspection"],
     intro:
@@ -66,7 +66,6 @@ const services = [
         a: "Yes. Bugman Plus can walk you through practical preparation steps so treatment areas are accessible.",
       },
     ],
-    keywords: ["bed bug control", "bed bug exterminator", "bed bug treatment"],
   },
   {
     slug: "mouse-control",
@@ -74,7 +73,7 @@ const services = [
     shortTitle: "Mice",
     image: serviceImages.rodent,
     alt: "Service photo for mouse control",
-    demand: "Highest demand",
+    label: "Rodent service",
     season: "All year, highest in fall and winter",
     intro:
       "Mouse inspection, control, and prevention programs for homes, restaurants, offices, warehouses, and rental properties.",
@@ -97,7 +96,6 @@ const services = [
         a: "No. Traps may be part of the plan, but inspection, entry-point awareness, sanitation, and follow-up make the program stronger.",
       },
     ],
-    keywords: ["mouse control", "mice exterminator", "mouse removal"],
   },
   {
     slug: "rat-control",
@@ -105,7 +103,7 @@ const services = [
     shortTitle: "Rats",
     image: serviceImages.rodent,
     alt: "Service photo for rat control",
-    demand: "High demand",
+    label: "Rodent service",
     season: "All year",
     intro:
       "Rat control programs for exterior burrows, garbage pressure, commercial sites, laneways, sheds, garages, and building edges.",
@@ -128,7 +126,6 @@ const services = [
         a: "Yes. Rats are larger, use different travel routes, and often require more exterior investigation and sanitation planning.",
       },
     ],
-    keywords: ["rat control", "rat removal", "rat exterminator"],
   },
   {
     slug: "cockroach-control",
@@ -136,7 +133,7 @@ const services = [
     shortTitle: "Cockroaches",
     image: serviceImages.cockroach,
     alt: "Service photo for cockroach pest control",
-    demand: "Highest demand",
+    label: "Interior service",
     season: "All year",
     intro:
       "Kitchen, bathroom, and utility-area programs for cockroach activity in residential and commercial spaces.",
@@ -166,7 +163,6 @@ const services = [
         a: "Yes. Programs can be planned for restaurants, offices, rental units, and other commercial spaces.",
       },
     ],
-    keywords: ["cockroach control", "roach exterminator", "commercial cockroach treatment"],
   },
   {
     slug: "ant-control",
@@ -174,7 +170,7 @@ const services = [
     shortTitle: "Ants",
     image: serviceImages.ant,
     alt: "Service photo for ant pest control",
-    demand: "Highest demand",
+    label: "Interior/exterior service",
     season: "Spring to summer",
     intro:
       "Interior and exterior ant treatment programs for trails, entry points, kitchens, patios, and structural gaps.",
@@ -206,7 +202,6 @@ const services = [
         a: "Yes. Treating exterior pressure and access points often helps reduce the activity that makes its way inside.",
       },
     ],
-    keywords: ["ant control", "ant exterminator", "house ant treatment"],
   },
   {
     slug: "wasp-nest-removal",
@@ -214,7 +209,7 @@ const services = [
     shortTitle: "Wasps",
     image: serviceImages.stinging,
     alt: "Service photo for wasp nest removal",
-    demand: "Highest demand",
+    label: "Nest service",
     season: "Spring to fall",
     intro:
       "Professional wasp and yellowjacket nest service for eaves, decks, sheds, soffits, wall voids, and ground nests.",
@@ -237,7 +232,6 @@ const services = [
         a: "In Ontario, nest calls usually build from spring through fall, with mature nests becoming more noticeable later in the season.",
       },
     ],
-    keywords: ["wasp nest removal", "wasp control", "yellowjacket control"],
   },
   {
     slug: "spider-control",
@@ -245,7 +239,7 @@ const services = [
     shortTitle: "Spiders",
     image: serviceImages.stinging,
     alt: "Service photo for spider control",
-    demand: "High demand",
+    label: "Perimeter service",
     season: "All year",
     intro:
       "Interior and exterior spider control for recurring webs, basement activity, garages, sheds, and perimeter pressure.",
@@ -268,7 +262,6 @@ const services = [
         a: "Spiders return where shelter and prey insects are available, especially around lights, cracks, clutter, and protected edges.",
       },
     ],
-    keywords: ["spider control", "spider exterminator", "web removal"],
   },
   {
     slug: "flea-control",
@@ -276,7 +269,7 @@ const services = [
     shortTitle: "Fleas",
     image: serviceImages.insect,
     alt: "Service photo for flea control",
-    demand: "High demand",
+    label: "Biting pest service",
     season: "Spring to fall",
     intro:
       "Flea treatment support for homes with pet activity, wildlife pressure, recurring bites, and carpet or upholstered areas.",
@@ -299,7 +292,6 @@ const services = [
         a: "Flea life stages can emerge after the first service, which is why preparation and follow-up timing matter.",
       },
     ],
-    keywords: ["flea control", "flea treatment", "flea exterminator"],
   },
   {
     slug: "mosquito-control",
@@ -307,7 +299,7 @@ const services = [
     shortTitle: "Mosquitoes",
     image: serviceImages.insect,
     alt: "Service photo for mosquito control",
-    demand: "Very common",
+    label: "Outdoor service",
     season: "Spring to fall",
     intro:
       "Outdoor mosquito control and breeding-site guidance for backyards, patios, event areas, and shaded wet zones.",
@@ -330,7 +322,6 @@ const services = [
         a: "Mosquito programs are most useful during the warm season, especially before outdoor gatherings or recurring backyard use.",
       },
     ],
-    keywords: ["mosquito control", "mosquito treatment", "backyard mosquito control"],
   },
   {
     slug: "carpenter-ant-control",
@@ -338,7 +329,7 @@ const services = [
     shortTitle: "Carpenter Ants",
     image: serviceImages.ant,
     alt: "Service photo for carpenter ant control",
-    demand: "Very common",
+    label: "Wood & ant service",
     season: "Spring to summer",
     intro:
       "Carpenter ant inspection and treatment for structural wood, moisture-damaged areas, exterior wood, decks, and satellite nests.",
@@ -361,7 +352,6 @@ const services = [
         a: "Winged ants indoors can suggest an established colony or nearby nesting pressure that deserves inspection.",
       },
     ],
-    keywords: ["carpenter ant control", "carpenter ant exterminator", "black ant control"],
   },
   {
     slug: "carpenter-bee-control",
@@ -369,7 +359,7 @@ const services = [
     shortTitle: "Carpenter Bees",
     image: serviceImages.stinging,
     alt: "Service photo for carpenter bee control",
-    demand: "High-value seasonal",
+    label: "Wood pest service",
     season: "Spring to summer",
     intro:
       "Carpenter bee control for decks, fascia, trim, railings, pergolas, sheds, and exposed wood where round entry holes appear.",
@@ -392,7 +382,6 @@ const services = [
         a: "Sealing too early can trap activity inside. Treatment and timing should come before permanent sealing.",
       },
     ],
-    keywords: ["carpenter bee control", "carpenter bee removal", "wood boring bee control"],
   },
   {
     slug: "fruit-fly-control",
@@ -400,7 +389,7 @@ const services = [
     shortTitle: "Fruit Flies",
     image: serviceImages.insect,
     alt: "Service photo for fruit fly control",
-    demand: "Very common",
+    label: "Fly service",
     season: "Spring to fall",
     intro:
       "Fruit fly control for kitchens, restaurants, bars, break rooms, garbage areas, produce storage, and drains.",
@@ -423,7 +412,6 @@ const services = [
         a: "Yes. Identification matters because the breeding source and treatment path can be different.",
       },
     ],
-    keywords: ["fruit fly control", "fruit fly treatment", "small fly control"],
   },
   {
     slug: "drain-fly-control",
@@ -431,7 +419,7 @@ const services = [
     shortTitle: "Drain Flies",
     image: serviceImages.insect,
     alt: "Service photo for drain fly control",
-    demand: "Very common",
+    label: "Drain & fly service",
     season: "All year",
     intro:
       "Drain fly inspection and treatment for floor drains, sink drains, mechanical rooms, restaurants, basements, and damp utility spaces.",
@@ -454,7 +442,6 @@ const services = [
         a: "No. The breeding source needs to be found and treated or the activity usually returns.",
       },
     ],
-    keywords: ["drain fly control", "moth fly treatment", "small fly exterminator"],
   },
   {
     slug: "cluster-fly-control",
@@ -462,7 +449,7 @@ const services = [
     shortTitle: "Cluster Flies",
     image: serviceImages.insect,
     alt: "Service photo for cluster fly control",
-    demand: "Very common",
+    label: "Seasonal fly service",
     season: "Fall and spring",
     intro:
       "Cluster fly service for attics, upper floors, windows, wall voids, and overwintering pressure in homes and cottages.",
@@ -485,7 +472,6 @@ const services = [
         a: "Prevention is strongest before fall entry pressure, but active indoor issues can still be assessed.",
       },
     ],
-    keywords: ["cluster fly control", "cluster fly treatment", "overwintering fly control"],
   },
   {
     slug: "silverfish-control",
@@ -493,7 +479,7 @@ const services = [
     shortTitle: "Silverfish",
     image: serviceImages.insect,
     alt: "Service photo for silverfish control",
-    demand: "Very common",
+    label: "Crawling insect service",
     season: "All year",
     intro:
       "Silverfish control for bathrooms, basements, closets, storage rooms, bookshelves, and damp hidden spaces.",
@@ -516,7 +502,6 @@ const services = [
         a: "They can damage paper, books, wallpaper, fabrics, and stored materials when activity is left unchecked.",
       },
     ],
-    keywords: ["silverfish control", "silverfish exterminator", "firebrat control"],
   },
   {
     slug: "carpet-beetle-control",
@@ -524,7 +509,7 @@ const services = [
     shortTitle: "Carpet Beetles",
     image: serviceImages.insect,
     alt: "Service photo for carpet beetle control",
-    demand: "Very common",
+    label: "Fabric pest service",
     season: "All year",
     intro:
       "Carpet beetle inspection and treatment for closets, carpets, rugs, upholstery, stored fabrics, and hidden lint buildup.",
@@ -547,7 +532,6 @@ const services = [
         a: "Adults are attracted to light and may appear at windows even when larvae are feeding elsewhere.",
       },
     ],
-    keywords: ["carpet beetle control", "carpet beetle treatment", "fabric pest control"],
   },
   {
     slug: "pantry-pest-control",
@@ -555,7 +539,7 @@ const services = [
     shortTitle: "Pantry Pests",
     image: serviceImages.insect,
     alt: "Service photo for pantry pest control",
-    demand: "Very common",
+    label: "Pantry pest service",
     season: "All year",
     intro:
       "Pantry pest control for moths, beetles, weevils, flour products, grain products, pet food, and dry-food storage.",
@@ -578,7 +562,6 @@ const services = [
         a: "Yes. Larvae and adults can move through nearby storage areas, which is why a full inspection matters.",
       },
     ],
-    keywords: ["pantry pest control", "pantry moth control", "weevil treatment"],
   },
   {
     slug: "earwig-control",
@@ -586,7 +569,7 @@ const services = [
     shortTitle: "Earwigs",
     image: serviceImages.insect,
     alt: "Service photo for earwig control",
-    demand: "Very common",
+    label: "Moisture pest service",
     season: "Spring to fall",
     intro:
       "Earwig control for damp exterior edges, basements, garages, patios, gardens, door thresholds, and lower-level rooms.",
@@ -609,7 +592,6 @@ const services = [
         a: "No. They are usually a nuisance pest, but recurring indoor activity still needs source and entry-point control.",
       },
     ],
-    keywords: ["earwig control", "earwig treatment", "earwig exterminator"],
   },
   {
     slug: "stink-bug-control",
@@ -617,7 +599,7 @@ const services = [
     shortTitle: "Stink Bugs",
     image: serviceImages.insect,
     alt: "Service photo for stink bug control",
-    demand: "Seasonal invader",
+    label: "Seasonal service",
     season: "Fall and spring",
     intro:
       "Stink bug and seasonal invader control for exterior walls, sunny windows, attics, siding gaps, and overwintering entry points.",
@@ -640,7 +622,6 @@ const services = [
         a: "Late summer to fall prevention is usually best because many invaders are trying to enter before winter.",
       },
     ],
-    keywords: ["stink bug control", "seasonal invader control", "boxelder bug control"],
   },
   {
     slug: "house-fly-control",
@@ -648,7 +629,7 @@ const services = [
     shortTitle: "House Flies",
     image: serviceImages.insect,
     alt: "Service photo for house fly control",
-    demand: "Very common",
+    label: "Fly service",
     season: "Spring to fall",
     intro:
       "House fly control for restaurants, garbage rooms, kitchens, commercial sites, food-handling spaces, and homes.",
@@ -671,7 +652,6 @@ const services = [
         a: "Yes. Professional fly control can support sanitation, monitoring, and prevention programs for food premises.",
       },
     ],
-    keywords: ["house fly control", "fly control", "commercial fly treatment"],
   },
 ];
 
@@ -680,7 +660,7 @@ const locations = [
     slug: "oshawa",
     name: "Oshawa",
     region: "ON",
-    descriptor: "the home base for Bugman Plus and one of the highest-priority pest control markets in Durham Region",
+    descriptor: "the home base for Bugman Plus, with homes, rentals, restaurants, and commercial properties that need dependable pest control",
   },
   {
     slug: "whitby",
@@ -704,13 +684,13 @@ const locations = [
     slug: "clarington",
     name: "Clarington",
     region: "ON",
-    descriptor: "an eastern Durham Region municipality with residential, rural, commercial, and seasonal pest control demand",
+    descriptor: "an eastern Durham Region municipality with residential, rural, commercial, and seasonal pest control needs",
   },
   {
     slug: "bowmanville",
     name: "Bowmanville",
     region: "ON",
-    descriptor: "a high-intent Clarington community where homeowners and businesses search locally for pest control service",
+    descriptor: "a Clarington community with homeowners, rental properties, and businesses that need local pest control support",
   },
   {
     slug: "courtice",
@@ -728,7 +708,7 @@ const locations = [
     slug: "brooklin",
     name: "Brooklin",
     region: "ON",
-    descriptor: "a north Whitby community where new homes, older properties, and seasonal pests create local search demand",
+    descriptor: "a north Whitby community where new homes, older properties, and seasonal pest pressure can affect families and businesses",
   },
   {
     slug: "port-perry",
@@ -752,20 +732,20 @@ const locations = [
     slug: "brock",
     name: "Brock",
     region: "ON",
-    descriptor: "a north Durham municipality with rural, cottage, farm-adjacent, and residential pest control demand",
+    descriptor: "a north Durham municipality with rural, cottage, farm-adjacent, and residential pest control needs",
   },
   {
     slug: "durham-region",
     name: "Durham Region",
     region: "ON",
     schemaType: "AdministrativeArea",
-    descriptor: "the primary programmatic SEO service area for Bugman Plus pest control pages",
+    descriptor: "the core service area for Bugman Plus, including homes, rentals, restaurants, offices, and commercial properties",
   },
   {
     slug: "scarborough",
     name: "Scarborough",
     region: "ON",
-    descriptor: "an east Toronto and GTA service area with dense residential, apartment, restaurant, and commercial pest control demand",
+    descriptor: "an east Toronto and GTA service area with dense residential, apartment, restaurant, and commercial pest control needs",
   },
   {
     slug: "north-york",
@@ -822,37 +802,22 @@ const locationServiceDescription = (location, service) =>
     ? `Need ${service.title.toLowerCase()} in ${location.name}, ${location.region}? Bugman Plus provides focused Durham Region pest inspection and treatment programs for homes, rentals, restaurants, offices, and commercial properties.`
     : `Need ${service.title.toLowerCase()} in ${location.name}, ${location.region}? Bugman Plus provides focused GTA pest inspection and treatment programs for homes, rentals, restaurants, offices, warehouses, and commercial properties.`;
 
-const demandTiers = [
+const pestConcernGroups = [
   {
-    title: "Highest Demand",
-    items: ["Bed Bugs", "Mice", "Wasps & Yellowjackets", "Ants", "Cockroaches", "Spiders", "Rats", "Fleas"],
+    title: "Indoor Pest Problems",
+    items: ["Bed bugs", "Cockroaches", "Ants", "Silverfish", "Carpet beetles", "Pantry pests", "Drain flies"],
   },
   {
-    title: "Very Common",
-    items: [
-      "Carpenter ants",
-      "Pavement ants",
-      "Pharaoh ants",
-      "Cluster flies",
-      "Fruit flies",
-      "Drain flies",
-      "Mosquitoes",
-      "Earwigs",
-      "Silverfish",
-      "Carpet beetles",
-      "Pantry pests",
-      "House flies",
-      "Centipedes",
-      "Millipedes",
-    ],
+    title: "Rodent Activity",
+    items: ["House mice", "Deer mice", "Norway rats", "Roof rats", "Garage activity", "Basement activity", "Commercial rodent pressure"],
   },
   {
-    title: "Seasonal Invaders",
-    items: ["Stink bugs", "Boxelder bugs", "Asian lady beetles", "Clover mites", "Ground beetles", "Sowbugs", "Pillbugs", "Crickets"],
+    title: "Outdoor & Stinging Pests",
+    items: ["Wasps", "Yellowjackets", "Spiders", "Mosquitoes", "Fleas", "Earwigs", "Carpenter bees"],
   },
   {
-    title: "High-Value Specialty",
-    items: ["Carpenter bees", "Bird mites", "Bat bugs", "Rodent mites", "Clothes moths", "Wood-boring beetles", "Termites", "Dead animal-related flies"],
+    title: "Seasonal & Specialty Pests",
+    items: ["Cluster flies", "Stink bugs", "Boxelder bugs", "Asian lady beetles", "Bird mites", "Bat bugs", "Wood-boring beetles"],
   },
 ];
 
@@ -880,29 +845,6 @@ const pestGroups = [
   { title: "Crawling Insects", items: ["Silverfish", "Firebrats", "Earwigs", "Crickets", "Centipedes", "Millipedes", "Sowbugs", "Pillbugs", "Spiders"] },
   { title: "Seasonal Invaders", items: ["Boxelder bugs", "Brown marmorated stink bugs", "Asian lady beetles", "Elm seed bugs", "Pine seed bugs", "Clover mites"] },
   { title: "Moisture & Wood Pests", items: ["Psocids", "Booklice", "Mold mites", "Grain mites", "Termites", "Carpenter ants", "Carpenter bees", "Wood-boring beetles"] },
-];
-
-const durhamKeywordClusters = [
-  {
-    title: "Core Durham Searches",
-    items: ["pest control Durham Region", "Durham Region exterminator", "exterminator near me Durham", "local pest control Durham"],
-  },
-  {
-    title: "Primary City Keywords",
-    items: ["pest control Oshawa", "pest control Whitby", "pest control Ajax", "pest control Pickering", "pest control Clarington"],
-  },
-  {
-    title: "Community Keywords",
-    items: ["pest control Bowmanville", "pest control Courtice", "pest control Newcastle", "pest control Brooklin", "pest control Port Perry"],
-  },
-  {
-    title: "Highest-Intent Pest Keywords",
-    items: ["bed bug control Durham Region", "mouse control Oshawa", "wasp nest removal Whitby", "cockroach control Ajax", "ant control Pickering"],
-  },
-  {
-    title: "GTA Service Keywords",
-    items: ["pest control Scarborough", "pest control North York", "pest control Mississauga", "pest control Vaughan", "GTA pest control"],
-  },
 ];
 
 const serviceBySlug = Object.fromEntries(services.map((service) => [service.slug, service]));
@@ -1149,7 +1091,7 @@ const serviceCards = (items = services) => `
           <img src="${service.image}" alt="${service.alt}" loading="lazy" width="720" height="520">
           <span class="card-number">${String(index + 1).padStart(2, "0")}</span>
           <div class="service-card-content">
-            <div class="service-card-meta"><span>${service.demand}</span><span>${service.season}</span></div>
+            <div class="service-card-meta"><span>${service.label}</span><span>${service.season}</span></div>
             <h3>${service.title}</h3>
             <p>${service.summary}</p>
           </div>
@@ -1159,15 +1101,15 @@ const serviceCards = (items = services) => `
     .join("")}
 </div>`;
 
-const demandOverview = () => `
-<div class="demand-grid">
-  ${demandTiers
+const pestConcernOverview = () => `
+<div class="concern-grid">
+  ${pestConcernGroups
     .map(
-      (tier, index) => `
-      <article class="demand-card reveal">
+      (group, index) => `
+      <article class="concern-card reveal">
         <span>${String(index + 1).padStart(2, "0")}</span>
-        <h3>${tier.title}</h3>
-        <p>${tier.items.join(" / ")}</p>
+        <h3>${group.title}</h3>
+        <p>${group.items.join(" / ")}</p>
       </article>`,
     )
     .join("")}
@@ -1181,19 +1123,6 @@ const pestDirectory = () => `
       <article class="pest-group reveal">
         <h3>${group.title}</h3>
         <p>${group.items.join(" / ")}</p>
-      </article>`,
-    )
-    .join("")}
-</div>`;
-
-const keywordClusters = () => `
-<div class="keyword-grid">
-  ${durhamKeywordClusters
-    .map(
-      (cluster) => `
-      <article class="keyword-card reveal">
-        <h3>${cluster.title}</h3>
-        <div>${cluster.items.map((item) => `<span>${item}</span>`).join("")}</div>
       </article>`,
     )
     .join("")}
@@ -1303,8 +1232,8 @@ const homePage = () => {
         </div>
         <div class="hero-metrics" aria-label="Bugman Plus highlights">
           <div><strong>3 mo</strong><span>Interior warranty</span></div>
-          <div><strong>${services.length}</strong><span>Priority services</span></div>
-          <div><strong>${locations.length}</strong><span>SEO service areas</span></div>
+          <div><strong>${services.length}</strong><span>Pest services</span></div>
+          <div><strong>${locations.length}</strong><span>Service areas</span></div>
         </div>
       </section>
 
@@ -1343,20 +1272,20 @@ const homePage = () => {
       <section class="section market-section">
         <div class="section-heading split reveal">
           <div>
-            <p class="section-kicker">Ontario Pest Demand</p>
-            <h2>Built around the calls that matter most in Durham Region.</h2>
-            <p>Priority service pages now follow the highest-intent pest categories for Durham homeowners, landlords, food premises, offices, and commercial properties.</p>
+            <p class="section-kicker">Common Pest Problems</p>
+            <h2>Prepared for the pest issues people notice at home or work.</h2>
+            <p>From bed bugs and rodents to wasps, ants, cockroaches, flies, and seasonal insects, Bugman Plus organizes service around clear inspection, treatment, and prevention.</p>
           </div>
           <a class="text-link" href="/services/">See all services</a>
         </div>
-        ${demandOverview()}
+        ${pestConcernOverview()}
       </section>
 
       <section class="section services-section">
         <div class="section-heading split reveal">
           <div>
             <p class="section-kicker">Services</p>
-            <h2>Twenty high-intent pest control services for Ontario search demand.</h2>
+            <h2>Twenty focused pest control services for Ontario homes and businesses.</h2>
           </div>
           <a class="text-link" href="/services/">View all services</a>
         </div>
@@ -1469,17 +1398,17 @@ const servicesPage = () =>
         <img src="${assets.hero}" alt="Bugman Plus pest control service background" width="1800" height="1315">
         <div class="subhero-content reveal">
           <p class="eyebrow">Services</p>
-          <h1>Precision pest control for Ontario's most searched pest problems.</h1>
+          <h1>Precision pest control for Ontario homes and businesses.</h1>
           <p>Choose the service that matches what you are seeing, then send the pest, property type, and location details for a focused quote.</p>
         </div>
       </section>
       <section class="section market-section">
         <div class="section-heading reveal">
-          <p class="section-kicker">Demand Tiers</p>
-          <h2>Service priorities for Durham Region properties.</h2>
-          <p>The exact percentages are a marketing planning model, while the pest categories align with Canadian public-health and professional pest-management guidance.</p>
+          <p class="section-kicker">Service Guide</p>
+          <h2>Find the right starting point for your pest issue.</h2>
+          <p>Use these common pest groups to match the issue you are seeing with the right Bugman Plus service.</p>
         </div>
-        ${demandOverview()}
+        ${pestConcernOverview()}
       </section>
       <section class="section services-section">
         ${serviceCards()}
@@ -1487,8 +1416,8 @@ const servicesPage = () =>
       <section class="section pest-directory-section">
         <div class="section-heading reveal">
           <p class="section-kicker">Pests Treated</p>
-          <h2>A complete pest directory for broader organic reach.</h2>
-          <p>These groups support the core service pages with long-tail search language for Ontario homes, apartments, businesses, and food premises.</p>
+          <h2>A complete pest directory for common Ontario pest issues.</h2>
+          <p>If you do not see the exact pest you are dealing with, Bugman Plus can help identify the activity and recommend the next step.</p>
         </div>
         ${pestDirectory()}
       </section>
@@ -1605,7 +1534,7 @@ const locationPage = (location) =>
                   <img src="${service.image}" alt="${service.alt}" loading="lazy" width="720" height="520">
                   <span class="card-number">${String(index + 1).padStart(2, "0")}</span>
                   <div class="service-card-content">
-                    <div class="service-card-meta"><span>${service.demand}</span><span>${service.season}</span></div>
+                    <div class="service-card-meta"><span>${service.label}</span><span>${service.season}</span></div>
                     <h3>${service.title}</h3>
                     <p>${service.summary}</p>
                   </div>
@@ -1641,18 +1570,10 @@ const locationsPage = () =>
       <section class="section location-section">
         <div class="section-heading reveal">
           <p class="section-kicker">Locations</p>
-          <h2>Focused local pages for high-intent pest searches.</h2>
-          <p>Each area connects to the full 20-service catalog for stronger programmatic SEO coverage.</p>
+          <h2>Choose your local Bugman Plus service area.</h2>
+          <p>Each area includes services for common residential, rental, restaurant, office, warehouse, and commercial pest issues.</p>
         </div>
         ${locationLinks()}
-      </section>
-      <section class="section keyword-section">
-        <div class="section-heading reveal">
-          <p class="section-kicker">Location Keyword Focus</p>
-          <h2>Search language built around local pest control intent.</h2>
-          <p>The main programmatic structure concentrates on Durham Region and GTA pest control, local exterminator, city-specific service, and high-ROI pest keywords.</p>
-        </div>
-        ${keywordClusters()}
       </section>
       <section class="section services-section">
         <div class="section-heading split reveal">

@@ -797,16 +797,6 @@ const demandTiers = [
   },
 ];
 
-const marketingFocus = [
-  { label: "Bed Bugs", value: 35 },
-  { label: "Rodents", value: 20 },
-  { label: "Wasps", value: 15 },
-  { label: "Ants", value: 10 },
-  { label: "Cockroaches", value: 10 },
-  { label: "Spiders", value: 5 },
-  { label: "Other pests", value: 5 },
-];
-
 const pestGroups = [
   { title: "Rodents", items: ["House mice", "Deer mice", "Norway rats", "Roof rats"] },
   {
@@ -1093,19 +1083,6 @@ const demandOverview = () => `
     .join("")}
 </div>`;
 
-const marketingFocusChart = () => `
-<div class="focus-chart reveal" aria-label="Recommended Ontario pest control marketing focus">
-  ${marketingFocus
-    .map(
-      (item) => `
-      <div class="focus-row">
-        <div><strong>${item.label}</strong><span>${item.value}%</span></div>
-        <i style="--value: ${item.value}%"></i>
-      </div>`,
-    )
-    .join("")}
-</div>`;
-
 const pestDirectory = () => `
 <div class="pest-directory">
   ${pestGroups
@@ -1276,14 +1253,6 @@ const homePage = () => {
           <a class="text-link" href="/services/">See all services</a>
         </div>
         ${demandOverview()}
-        <div class="focus-panel">
-          <div class="focus-copy reveal">
-            <p class="section-kicker">Lead Focus</p>
-            <h3>Recommended marketing allocation</h3>
-            <p>Use bed bugs, rodents, wasps, ants, and cockroaches as the lead engines, then support them with spider and seasonal insect pages.</p>
-          </div>
-          ${marketingFocusChart()}
-        </div>
       </section>
 
       <section class="section services-section">
@@ -1414,14 +1383,6 @@ const servicesPage = () =>
           <p>The exact percentages are a marketing planning model, while the pest categories align with Canadian public-health and professional pest-management guidance.</p>
         </div>
         ${demandOverview()}
-        <div class="focus-panel">
-          <div class="focus-copy reveal">
-            <p class="section-kicker">Marketing ROI</p>
-            <h3>Lead with the highest-intent services.</h3>
-            <p>Bed bugs and rodents should carry the most page depth, internal linking, and paid search effort, followed by wasps, ants, and cockroaches.</p>
-          </div>
-          ${marketingFocusChart()}
-        </div>
       </section>
       <section class="section services-section">
         ${serviceCards()}

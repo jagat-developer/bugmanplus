@@ -224,6 +224,10 @@ button {
   width: 100%;
 }
 
+.mobile-call-float {
+  display: none;
+}
+
 .discount-modal {
   position: fixed;
   inset: 0;
@@ -328,6 +332,16 @@ button {
   color: var(--brand);
   font-size: 14px;
   font-weight: 900;
+}
+
+@keyframes mobileCallColor {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .text-link {
@@ -1300,6 +1314,48 @@ p {
     width: calc(100% - 20px);
     min-height: 62px;
     gap: 10px;
+  }
+
+  .site-shell {
+    padding-bottom: 92px;
+  }
+
+  .mobile-call-float {
+    position: fixed;
+    left: 14px;
+    right: 14px;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    z-index: 80;
+    display: flex;
+    min-height: 64px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 18px;
+    border: 1px solid rgba(255, 223, 0, 0.76);
+    border-radius: 8px;
+    color: #050505;
+    background: linear-gradient(90deg, #ffdf00, #fff2a6, #5fd2dc, #ffdf00);
+    background-size: 260% 100%;
+    box-shadow: 0 18px 52px rgba(255, 223, 0, 0.28);
+    animation: mobileCallColor 4s ease-in-out infinite;
+  }
+
+  body.modal-open .mobile-call-float {
+    display: none;
+  }
+
+  .mobile-call-float span {
+    font-size: 12px;
+    font-weight: 950;
+    text-transform: uppercase;
+  }
+
+  .mobile-call-float strong {
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 950;
+    white-space: nowrap;
   }
 
   .brand {

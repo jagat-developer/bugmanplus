@@ -1112,6 +1112,12 @@ const discountPopup = () => `
   </section>
 </div>`;
 
+const mobileCallButton = () => `
+<a class="mobile-call-float" href="tel:${site.phoneHref}" aria-label="Call Bugman Plus now at ${site.phone}">
+  <span>Call Now</span>
+  <strong>${site.phone}</strong>
+</a>`;
+
 const shell = ({ title, description, path, active, image, schema, children }) => `${buildHead({
   title,
   description,
@@ -1128,6 +1134,7 @@ const shell = ({ title, description, path, active, image, schema, children }) =>
     ${footer()}
   </div>
   ${discountPopup()}
+  ${mobileCallButton()}
   <script src="/assets/js/main.js" defer></script>
 </body>
 </html>`;

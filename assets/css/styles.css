@@ -723,6 +723,48 @@ p {
   font-size: 34px;
 }
 
+.quote-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.call-now-card {
+  display: grid;
+  gap: 4px;
+  align-items: center;
+  justify-items: center;
+  min-height: 110px;
+  padding: 22px;
+  border: 1px solid rgba(255, 223, 0, 0.72);
+  border-radius: 8px;
+  color: #080808;
+  background:
+    linear-gradient(135deg, #ffdf00, #fff0a2),
+    var(--brand);
+  box-shadow: 0 18px 48px rgba(255, 223, 0, 0.22);
+  text-align: center;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.call-now-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 60px rgba(255, 223, 0, 0.3);
+}
+
+.call-now-card span {
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.call-now-card strong {
+  font-size: 38px;
+  line-height: 1;
+  font-weight: 950;
+}
+
 .quote-form {
   padding: 26px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1241,6 +1283,15 @@ p {
 
   .contact-methods.large a {
     font-size: 24px;
+  }
+
+  .call-now-card {
+    min-height: 96px;
+    padding: 18px;
+  }
+
+  .call-now-card strong {
+    font-size: 29px;
   }
 
   .quote-form {

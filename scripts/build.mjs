@@ -1144,29 +1144,36 @@ const faqList = (faqs) => `
 </div>`;
 
 const quoteForm = (context = "Website inquiry") => `
-<form class="quote-form reveal" action="mailto:${site.email}" method="post" enctype="text/plain" data-quote-form>
-  <input type="hidden" name="context" value="${escapeHtml(context)}">
-  <div class="form-grid">
-    <label>Name<input name="name" type="text" placeholder="Your name" required></label>
-    <label>Email<input name="email" type="email" placeholder="you@example.com" required></label>
-    <label>Phone<input name="phone" type="tel" placeholder="905-000-0000"></label>
-    <label>Service
-      <select name="service" required>
-      <option value="">Select a service</option>
-        ${services.map((service) => `<option value="${service.slug}">${service.title}</option>`).join("")}
-      </select>
-    </label>
-    <label>Location
-      <select name="location" required>
-        <option value="">Select a location</option>
-        ${locations.map((location) => `<option value="${location.slug}">${location.name}, ${location.region}</option>`).join("")}
-      </select>
-    </label>
-    <label class="form-full">Message<textarea name="message" placeholder="Tell us what you are seeing, where it is happening, and when you first noticed it." required></textarea></label>
-  </div>
-  <button class="button button-wide" type="submit">Submit Request</button>
-  <p class="form-note" data-form-note></p>
-</form>`;
+<div class="quote-stack reveal">
+  <a class="call-now-card" href="tel:${site.phoneHref}" aria-label="Call Bugman Plus now at ${site.phone}">
+    <span>Call Now</span>
+    <strong>${site.phone}</strong>
+  </a>
+  <form class="quote-form" action="mailto:${site.email}" method="post" enctype="text/plain" data-quote-form>
+    <input type="hidden" name="context" value="${escapeHtml(context)}">
+    <div class="form-grid">
+      <label>Name<input name="name" type="text" placeholder="Your name" required></label>
+      <label>Email<input name="email" type="email" placeholder="you@example.com" required></label>
+      <label>Phone<input name="phone" type="tel" placeholder="905-000-0000"></label>
+      <label>Service
+        <select name="service" required>
+          <option value="">Select a service</option>
+          ${services.map((service) => `<option value="${service.slug}">${service.title}</option>`).join("")}
+        </select>
+      </label>
+      <label>Location
+        <select name="location" required>
+          <option value="">Select a location</option>
+          ${locations.map((location) => `<option value="${location.slug}">${location.name}, ${location.region}</option>`).join("")}
+        </select>
+      </label>
+      <label class="form-full">Message<textarea name="message" placeholder="Tell us what you are seeing, where it is happening, and when you first noticed it." required></textarea></label>
+    </div>
+    <button class="button button-wide" type="submit">Submit Request</button>
+    <p class="form-note" data-form-note></p>
+  </form>
+</div>
+`;
 
 const homePage = () => {
   const faqs = [

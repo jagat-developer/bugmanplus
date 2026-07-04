@@ -784,6 +784,84 @@ p {
   font-weight: 900;
 }
 
+.service-area-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.area-group {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: 30px;
+  align-items: start;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 223, 0, 0.08), transparent 42%),
+    var(--panel);
+}
+
+.area-group-copy p {
+  margin-bottom: 14px;
+  color: var(--brand);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.area-group-copy h3 {
+  max-width: 460px;
+  margin-bottom: 14px;
+  font-size: 32px;
+  line-height: 1.05;
+}
+
+.area-group-copy span {
+  display: block;
+  max-width: 540px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.area-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.area-list a {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.035);
+  font-weight: 850;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.area-list a::after {
+  content: "View";
+  color: var(--brand);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.area-list a:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 223, 0, 0.38);
+  background: rgba(255, 223, 0, 0.08);
+}
+
 .contact-split {
   display: grid;
   grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
@@ -1250,8 +1328,13 @@ p {
   .about-band,
   .contact-split,
   .narrative-grid,
-  .detail-grid {
+  .detail-grid,
+  .area-group {
     grid-template-columns: 1fr;
+  }
+
+  .area-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .detail-aside {
@@ -1369,6 +1452,7 @@ p {
   .service-grid,
   .concern-grid,
   .pest-directory,
+  .area-list,
   .location-grid,
   .footer-grid,
   .form-grid {

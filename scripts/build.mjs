@@ -797,10 +797,41 @@ const durhamLocationSlugs = new Set([
 const locationMarketLabel = (location) =>
   durhamLocationSlugs.has(location.slug) ? "Durham Region Exterminator" : "GTA Pest Control";
 
+const locationRegionLabel = (location) =>
+  durhamLocationSlugs.has(location.slug) ? "Durham Region" : "GTA";
+
 const locationServiceDescription = (location, service) =>
   durhamLocationSlugs.has(location.slug)
     ? `Need ${service.title.toLowerCase()} in ${location.name}, ${location.region}? Bugman Plus provides focused Durham Region pest inspection and treatment programs for homes, rentals, restaurants, offices, and commercial properties.`
     : `Need ${service.title.toLowerCase()} in ${location.name}, ${location.region}? Bugman Plus provides focused GTA pest inspection and treatment programs for homes, rentals, restaurants, offices, warehouses, and commercial properties.`;
+
+const serviceAreaGroups = [
+  {
+    title: "Durham Region",
+    note: "Oshawa-based service for nearby homes, rental properties, restaurants, offices, rural-edge properties, and commercial spaces.",
+    slugs: [
+      "oshawa",
+      "whitby",
+      "ajax",
+      "pickering",
+      "clarington",
+      "bowmanville",
+      "courtice",
+      "newcastle",
+      "brooklin",
+      "port-perry",
+      "scugog",
+      "uxbridge",
+      "brock",
+      "durham-region",
+    ],
+  },
+  {
+    title: "Toronto & GTA",
+    note: "Support for apartments, condos, restaurants, offices, warehouses, family homes, and commercial properties across key GTA areas.",
+    slugs: ["scarborough", "north-york", "mississauga", "vaughan", "gta"],
+  },
+];
 
 const pestConcernGroups = [
   {
@@ -1138,9 +1169,34 @@ const locationLinks = (service) => `
   ${locations
     .map((location) => {
       const href = service ? `/locations/${location.slug}/${service.slug}/` : `/locations/${location.slug}/`;
-      const label = service ? `${service.shortTitle} in ${location.name}` : `Pest control in ${location.name}`;
-      return `<a class="location-chip reveal" href="${href}"><span>${label}</span><small>${location.region}</small></a>`;
+      const label = service ? `${service.shortTitle} - ${location.name}` : location.name;
+      const meta = service ? locationRegionLabel(location) : "View services";
+      return `<a class="location-chip reveal" href="${href}"><span>${label}</span><small>${meta}</small></a>`;
     })
+    .join("")}
+</div>`;
+
+const serviceAreaPanel = () => `
+<div class="service-area-panel">
+  ${serviceAreaGroups
+    .map(
+      (group) => `
+      <article class="area-group reveal">
+        <div class="area-group-copy">
+          <p>${group.title}</p>
+          <h3>${group.title === "Durham Region" ? "Local coverage from Bugman Plus home base." : "GTA support for busy residential and commercial properties."}</h3>
+          <span>${group.note}</span>
+        </div>
+        <div class="area-list">
+          ${group.slugs
+            .map((slug) => {
+              const location = locationBySlug[slug];
+              return `<a href="/locations/${location.slug}/" aria-label="View Bugman Plus services in ${location.name}"><span>${location.name}</span></a>`;
+            })
+            .join("")}
+        </div>
+      </article>`,
+    )
     .join("")}
 </div>`;
 
@@ -1564,16 +1620,16 @@ const locationsPage = () =>
         <div class="subhero-content reveal">
           <p class="eyebrow">Service Areas</p>
           <h1>Pest control across Durham Region and the GTA.</h1>
-          <p>Choose a location to find service pages for bed bugs, mice, rats, cockroaches, ants, wasps, spiders, flies, pantry pests, and seasonal invaders.</p>
+          <p>Bugman Plus is based in Oshawa and supports nearby Durham communities, Toronto, and key GTA areas with practical pest control for homes and businesses.</p>
         </div>
       </section>
       <section class="section location-section">
         <div class="section-heading reveal">
-          <p class="section-kicker">Locations</p>
-          <h2>Choose your local Bugman Plus service area.</h2>
-          <p>Each area includes services for common residential, rental, restaurant, office, warehouse, and commercial pest issues.</p>
+          <p class="section-kicker">Areas We Serve</p>
+          <h2>Start with the area closest to your property.</h2>
+          <p>Not sure which area to choose? Call Bugman Plus and share the address or nearest intersection.</p>
         </div>
-        ${locationLinks()}
+        ${serviceAreaPanel()}
       </section>
       <section class="section services-section">
         <div class="section-heading split reveal">

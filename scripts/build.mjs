@@ -1093,6 +1093,25 @@ const footer = () => `
   </div>
 </footer>`;
 
+const discountPopup = () => `
+<div class="discount-modal" data-discount-modal hidden>
+  <div class="discount-backdrop" data-discount-close></div>
+  <section class="discount-dialog" role="dialog" aria-modal="true" aria-labelledby="discount-title">
+    <button class="discount-close" type="button" aria-label="Close discount offer" data-discount-close>&times;</button>
+    <p class="section-kicker">New Customer Offer</p>
+    <h2 id="discount-title">Save 5% on your first service.</h2>
+    <p>Register with your email and phone number, then mention this offer when Bugman Plus confirms your appointment.</p>
+    <form class="discount-form" action="mailto:${site.email}" method="post" enctype="text/plain" data-discount-form>
+      <input type="hidden" name="context" value="5% discount registration">
+      <label>Email<input name="email" type="email" placeholder="you@example.com" required></label>
+      <label>Phone<input name="phone" type="tel" placeholder="905-000-0000" required></label>
+      <button class="button button-wide" type="submit">Claim 5% Discount</button>
+      <p class="discount-note" data-discount-note></p>
+    </form>
+    <a class="discount-call" href="tel:${site.phoneHref}">Prefer to call? ${site.phone}</a>
+  </section>
+</div>`;
+
 const shell = ({ title, description, path, active, image, schema, children }) => `${buildHead({
   title,
   description,
@@ -1108,6 +1127,7 @@ const shell = ({ title, description, path, active, image, schema, children }) =>
     </main>
     ${footer()}
   </div>
+  ${discountPopup()}
   <script src="/assets/js/main.js" defer></script>
 </body>
 </html>`;

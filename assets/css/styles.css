@@ -44,6 +44,10 @@ body {
   min-height: 100vh;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -218,6 +222,112 @@ button {
 
 .button-wide {
   width: 100%;
+}
+
+.discount-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.discount-modal[hidden] {
+  display: none;
+}
+
+.discount-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.discount-dialog {
+  position: relative;
+  width: min(100%, 500px);
+  padding: 34px;
+  border: 1px solid rgba(255, 223, 0, 0.42);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 223, 0, 0.1), rgba(255, 255, 255, 0.025)),
+    #080808;
+  box-shadow: 0 34px 100px rgba(0, 0, 0, 0.74);
+}
+
+.discount-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 28px;
+  line-height: 1;
+}
+
+.discount-dialog h2 {
+  max-width: 360px;
+  margin-bottom: 14px;
+  font-size: 44px;
+  line-height: 1.02;
+}
+
+.discount-dialog p {
+  color: var(--soft);
+  line-height: 1.65;
+}
+
+.discount-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.discount-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--soft);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.discount-form input {
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0 14px;
+  outline: none;
+}
+
+.discount-form input:focus {
+  border-color: var(--brand);
+}
+
+.discount-note {
+  min-height: 20px;
+  margin: 0;
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.discount-call {
+  display: inline-flex;
+  margin-top: 14px;
+  color: var(--brand);
+  font-size: 14px;
+  font-weight: 900;
 }
 
 .text-link {
@@ -1223,6 +1333,18 @@ p {
   .hero-lede,
   .subhero p {
     font-size: 17px;
+  }
+
+  .discount-modal {
+    padding: 14px;
+  }
+
+  .discount-dialog {
+    padding: 28px 18px 20px;
+  }
+
+  .discount-dialog h2 {
+    font-size: 34px;
   }
 
   .hero-metrics,

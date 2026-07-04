@@ -72,3 +72,62 @@ document.querySelectorAll("[data-quote-form]").forEach((form) => {
     }
   });
 });
+
+const discountModal = document.querySelector("[data-discount-modal]");
+const discountForm = document.querySelector("[data-discount-form]");
+const discountNote = document.querySelector("[data-discount-note]");
+const discountStorageKey = "bugmanDiscountOfferDismissed";
+
+const discountStorage = {
+  get() {
+    const cookieMatch = () => document.cookie.match(new RegExp(`${discountStorageKey}=true`))?.[0];
+    try {
+      return window.localStorage.getItem(discountStorageKey) || cookieMatch();
+    } catch {
+      return cookieMatch() || null;
+    }
+  },
+  set() {
+    try {
+      window.localStorage.setItem(discountStorageKey, "true");
+    } catch {
+      // Ignore storage failures so the offer still works in private browsing.
+    }
+    document.cookie = `${discountStorageKey}=true; max-age=2592000; path=/; SameSite=Lax`;
+  },
+};
+
+const closeDiscountModal = () => {
+  if (!discountModal) return;
+  discountModal.hidden = true;
+  document.body.classList.remove("modal-open");
+  discountStorage.set();
+};
+
+if (discountModal && !discountStorage.get()) {
+  window.setTimeout(() => {
+    discountModal.hidden = false;
+    document.body.classList.add("modal-open");
+  }, 1200);
+
+  discountModal.addEventListener("click", (event) => {
+    if (event.target.closest("[data-discount-close]")) {
+      closeDiscountModal();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !discountModal.hidden) {
+      closeDiscountModal();
+    }
+  });
+}
+
+if (discountForm) {
+  discountForm.addEventListener("submit", () => {
+    discountStorage.set();
+    if (discountNote) {
+      discountNote.textContent = "Thanks. Your email client should open with the discount registration.";
+    }
+  });
+}

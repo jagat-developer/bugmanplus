@@ -51,7 +51,6 @@ if ("IntersectionObserver" in window) {
 }
 
 document.querySelectorAll("[data-quote-form]").forEach((form) => {
-  const note = form.querySelector("[data-form-note]");
   const params = new URLSearchParams(window.location.search);
   const service = params.get("service");
   const locationName = params.get("location");
@@ -65,17 +64,9 @@ document.querySelectorAll("[data-quote-form]").forEach((form) => {
   if (locationName && locationSelect) {
     locationSelect.value = locationName;
   }
-
-  form.addEventListener("submit", () => {
-    if (note) {
-      note.textContent = "Thanks. Your email client should open with the request details.";
-    }
-  });
 });
 
 const discountModal = document.querySelector("[data-discount-modal]");
-const discountForm = document.querySelector("[data-discount-form]");
-const discountNote = document.querySelector("[data-discount-note]");
 const discountStorageKey = "bugmanDiscountOfferDismissed";
 
 const discountStorage = {
@@ -123,11 +114,64 @@ if (discountModal && !discountStorage.get()) {
   });
 }
 
-if (discountForm) {
-  discountForm.addEventListener("submit", () => {
-    discountStorage.set();
-    if (discountNote) {
-      discountNote.textContent = "Thanks. Your email client should open with the discount registration.";
+const submitLeadForm = async (form) => {
+  const note = form.querySelector("[data-form-note], [data-discount-note]");
+  const submitButton = form.querySelector("button[type='submit']");
+  const successMessage = form.dataset.successMessage || "Thanks. Bugman Plus received your request.";
+  const formData = new FormData(form);
+  const payload = Object.fromEntries(formData.entries());
+
+  payload.page = window.location.href;
+  payload.pageTitle = document.title;
+
+  if (note) {
+    note.textContent = "Sending...";
+    note.classList.remove("is-error");
+  }
+
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.dataset.originalText = submitButton.textContent;
+    submitButton.textContent = "Sending...";
+  }
+
+  try {
+    const response = await fetch(form.action || "/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok || result.ok === false) {
+      throw new Error(result.message || "Submission failed.");
     }
+
+    if (form.matches("[data-discount-form]")) {
+      discountStorage.set();
+    }
+
+    form.reset();
+
+    if (note) {
+      note.textContent = successMessage;
+    }
+  } catch (error) {
+    if (note) {
+      note.textContent = "Something went wrong. Please call 905-924-2847 or try again.";
+      note.classList.add("is-error");
+    }
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = submitButton.dataset.originalText || "Submit";
+    }
+  }
+};
+
+document.querySelectorAll("[data-lead-form]").forEach((form) => {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    submitLeadForm(form);
   });
-}
+});

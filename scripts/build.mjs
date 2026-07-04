@@ -1014,15 +1014,15 @@ const header = (active = "") => `
   </a>
   <nav class="primary-nav" aria-label="Primary navigation" data-primary-nav>
     ${navItems
-      .map(
-        (item) =>
-          `<a class="${active === item.label.toLowerCase() ? "is-active" : ""}" href="${item.href}">${item.label}</a>`,
-      )
+      .map((item) => {
+        const isActive = active === item.label.toLowerCase();
+        return `<a class="${isActive ? "is-active" : ""}" href="${item.href}"${isActive ? ' aria-current="page"' : ""}>${item.label}</a>`;
+      })
       .join("")}
   </nav>
   <div class="header-actions">
     <a class="call-link" href="tel:${site.phoneHref}">${site.phone}</a>
-    <a class="button button-small" href="/quote/">Get a Quote</a>
+    <a class="button button-small${active === "quote" ? " is-active" : ""}" href="/quote/"${active === "quote" ? ' aria-current="page"' : ""}>Get a Quote</a>
     <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-button>
       <span></span><span></span>
     </button>
@@ -1052,10 +1052,14 @@ const footer = () => `
     <div class="footer-brand">
       <img src="${assets.logo}" alt="${site.name} logo" width="220" height="102">
       <p>${site.slogan}. Premium pest control for homes, businesses, landlords, and property teams.</p>
-      <form class="newsletter-form" action="mailto:${site.email}" method="post" enctype="text/plain">
+      <form class="newsletter-form" action="/api/contact" method="post" data-lead-form data-success-message="Thanks. Bugman Plus received your newsletter signup.">
+        <input type="hidden" name="formType" value="newsletter">
+        <input type="hidden" name="context" value="Newsletter signup">
+        <label class="form-hp">Website<input name="website" type="text" autocomplete="off" tabindex="-1"></label>
         <label class="sr-only" for="newsletter-email">Email</label>
         <input id="newsletter-email" name="email" type="email" placeholder="Your email" required>
         <button type="submit" aria-label="Subscribe">+</button>
+        <p class="newsletter-note" data-form-note></p>
       </form>
     </div>
   </div>
@@ -1074,8 +1078,10 @@ const discountPopup = () => `
     <p class="section-kicker">New Customer Offer</p>
     <h2 id="discount-title">Save 5% on your first service.</h2>
     <p>Register with your email and phone number, then mention this offer when Bugman Plus confirms your appointment.</p>
-    <form class="discount-form" action="mailto:${site.email}" method="post" enctype="text/plain" data-discount-form>
+    <form class="discount-form" action="/api/contact" method="post" data-discount-form data-lead-form data-success-message="Thanks. Bugman Plus received your discount registration.">
+      <input type="hidden" name="formType" value="discount">
       <input type="hidden" name="context" value="5% discount registration">
+      <label class="form-hp">Website<input name="website" type="text" autocomplete="off" tabindex="-1"></label>
       <label>Email<input name="email" type="email" placeholder="you@example.com" required></label>
       <label>Phone<input name="phone" type="tel" placeholder="905-000-0000" required></label>
       <button class="button button-wide" type="submit">Claim 5% Discount</button>
@@ -1091,14 +1097,16 @@ const mobileCallButton = () => `
   <strong>${site.phone}</strong>
 </a>`;
 
-const shell = ({ title, description, path, active, image, schema, children }) => `${buildHead({
+const bodyClassAttribute = (bodyClass = "") => (bodyClass ? ` class="${bodyClass}"` : "");
+
+const shell = ({ title, description, path, active, image, schema, children, bodyClass }) => `${buildHead({
   title,
   description,
   path,
   image,
   schema,
 })}
-<body id="top">
+<body id="top"${bodyClassAttribute(bodyClass)}>
   <div class="site-shell">
     ${header(active)}
     <main>
@@ -1224,8 +1232,10 @@ const quoteForm = (context = "Website inquiry") => `
     <span>Call Now</span>
     <strong>${site.phone}</strong>
   </a>
-  <form class="quote-form" action="mailto:${site.email}" method="post" enctype="text/plain" data-quote-form>
+  <form class="quote-form" action="/api/contact" method="post" data-quote-form data-lead-form data-success-message="Thanks. Bugman Plus received your request and will follow up soon.">
+    <input type="hidden" name="formType" value="quote">
     <input type="hidden" name="context" value="${escapeHtml(context)}">
+    <label class="form-hp">Website<input name="website" type="text" autocomplete="off" tabindex="-1"></label>
     <div class="form-grid">
       <label>Name<input name="name" type="text" placeholder="Your name" required></label>
       <label>Email<input name="email" type="email" placeholder="you@example.com" required></label>
@@ -1615,7 +1625,7 @@ const locationsPage = () =>
       breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Locations", path: "/locations/" }]),
     ],
     children: `
-      <section class="subhero subhero-compact">
+      <section class="subhero subhero-compact locations-hero">
         <img src="${assets.hero}" alt="Bugman Plus pest control service area background" width="1800" height="1315">
         <div class="subhero-content reveal">
           <p class="eyebrow">Service Areas</p>
@@ -1623,7 +1633,7 @@ const locationsPage = () =>
           <p>Bugman Plus is based in Oshawa and supports nearby Durham communities, Toronto, and key GTA areas with practical pest control for homes and businesses.</p>
         </div>
       </section>
-      <section class="section location-section">
+      <section class="section location-section locations-overview">
         <div class="section-heading reveal">
           <p class="section-kicker">Areas We Serve</p>
           <h2>Start with the area closest to your property.</h2>
@@ -1708,6 +1718,7 @@ const contactPage = () =>
       `Contact Bugman Plus for pest control in ${serviceAreaSummary}. Call 905-924-2847.`,
     path: "/contact/",
     active: "contact",
+    bodyClass: "has-form-call-card",
     schema: [
       localBusinessSchema(),
       breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact/" }]),
@@ -1742,7 +1753,8 @@ const quotePage = () =>
     description:
       `Request a Bugman Plus pest control quote for ${serviceAreaSummary}.`,
     path: "/quote/",
-    active: "contact",
+    active: "quote",
+    bodyClass: "has-form-call-card",
     schema: [
       localBusinessSchema(),
       breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Get a Quote", path: "/quote/" }]),

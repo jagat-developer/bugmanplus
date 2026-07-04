@@ -1,7 +1,8 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { cpSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 const root = process.cwd();
+const outputRoot = join(root, "public");
 const assetVersion = "20260704-images";
 const versionedAsset = (path) => `${path}?v=${assetVersion}`;
 const site = {
@@ -255,7 +256,7 @@ const escapeHtml = (value = "") =>
     .replaceAll('"', "&quot;");
 
 const write = (path, content) => {
-  const outputPath = join(root, path);
+  const outputPath = join(outputRoot, path);
   mkdirSync(dirname(outputPath), { recursive: true });
   writeFileSync(outputPath, content);
 };
@@ -972,6 +973,10 @@ ${paths
 
 const generatedPaths = ["/", "/about/", "/services/", "/contact/", "/quote/"];
 
+rmSync(outputRoot, { recursive: true, force: true });
+mkdirSync(outputRoot, { recursive: true });
+cpSync(join(root, "assets"), join(outputRoot, "assets"), { recursive: true });
+
 write("index.html", homePage());
 write("about/index.html", aboutPage());
 write("services/index.html", servicesPage());
@@ -1006,19 +1011,4 @@ Sitemap: ${site.url}/sitemap.xml
 `,
 );
 
-write(
-  "README.md",
-  `# Bugman Plus Premium Website
-
-Generated static, multi-page website for Bugman Plus.
-
-## Commands
-
-- \`npm run build\` regenerates pages from \`scripts/build.mjs\`.
-- \`npm run preview\` serves the site at \`http://localhost:4173\`.
-
-The service and location SEO pages are generated from shared service/location data in \`scripts/build.mjs\`.
-`,
-);
-
-console.log(`Generated ${generatedPaths.length} pages.`);
+console.log(`Generated ${generatedPaths.length} pages in public/.`);

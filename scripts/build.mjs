@@ -761,7 +761,66 @@ const locations = [
     schemaType: "AdministrativeArea",
     descriptor: "the primary programmatic SEO service area for Bugman Plus pest control pages",
   },
+  {
+    slug: "scarborough",
+    name: "Scarborough",
+    region: "ON",
+    descriptor: "an east Toronto and GTA service area with dense residential, apartment, restaurant, and commercial pest control demand",
+  },
+  {
+    slug: "north-york",
+    name: "North York",
+    region: "ON",
+    descriptor: "a major Toronto and GTA service area with condos, rental buildings, family homes, offices, and food-service pest control needs",
+  },
+  {
+    slug: "mississauga",
+    name: "Mississauga",
+    region: "ON",
+    descriptor: "a large GTA service area with residential towers, family homes, restaurants, warehouses, and commercial pest control needs",
+  },
+  {
+    slug: "vaughan",
+    name: "Vaughan",
+    region: "ON",
+    descriptor: "a York Region and GTA service area with homes, commercial plazas, restaurants, warehouses, and industrial pest control needs",
+  },
+  {
+    slug: "gta",
+    name: "Greater Toronto Area",
+    region: "ON",
+    schemaType: "AdministrativeArea",
+    descriptor: "the broader GTA service area for homes, rentals, restaurants, offices, warehouses, and commercial properties",
+  },
 ];
+
+const serviceAreaSummary =
+  "Oshawa, Whitby, Ajax, Pickering, Clarington, Bowmanville, Courtice, Newcastle, Brooklin, Port Perry, Scugog, Uxbridge, Brock, Durham Region, Scarborough, North York, Mississauga, Vaughan, and the GTA";
+
+const durhamLocationSlugs = new Set([
+  "oshawa",
+  "whitby",
+  "ajax",
+  "pickering",
+  "clarington",
+  "bowmanville",
+  "courtice",
+  "newcastle",
+  "brooklin",
+  "port-perry",
+  "scugog",
+  "uxbridge",
+  "brock",
+  "durham-region",
+]);
+
+const locationMarketLabel = (location) =>
+  durhamLocationSlugs.has(location.slug) ? "Durham Region Exterminator" : "GTA Pest Control";
+
+const locationServiceDescription = (location, service) =>
+  durhamLocationSlugs.has(location.slug)
+    ? `Need ${service.title.toLowerCase()} in ${location.name}, ${location.region}? Bugman Plus provides focused Durham Region pest inspection and treatment programs for homes, rentals, restaurants, offices, and commercial properties.`
+    : `Need ${service.title.toLowerCase()} in ${location.name}, ${location.region}? Bugman Plus provides focused GTA pest inspection and treatment programs for homes, rentals, restaurants, offices, warehouses, and commercial properties.`;
 
 const demandTiers = [
   {
@@ -839,6 +898,10 @@ const durhamKeywordClusters = [
   {
     title: "Highest-Intent Pest Keywords",
     items: ["bed bug control Durham Region", "mouse control Oshawa", "wasp nest removal Whitby", "cockroach control Ajax", "ant control Pickering"],
+  },
+  {
+    title: "GTA Service Keywords",
+    items: ["pest control Scarborough", "pest control North York", "pest control Mississauga", "pest control Vaughan", "GTA pest control"],
   },
 ];
 
@@ -1179,7 +1242,7 @@ const homePage = () => {
   const faqs = [
     {
       q: "What areas does Bugman Plus serve?",
-      a: "Bugman Plus is based in Oshawa and focuses on Durham Region, including Whitby, Ajax, Pickering, Clarington, Bowmanville, Courtice, Newcastle, Brooklin, Port Perry, Scugog, Uxbridge, and Brock.",
+      a: `Bugman Plus is based in Oshawa and serves ${serviceAreaSummary}.`,
     },
     {
       q: "Is there a warranty?",
@@ -1192,9 +1255,9 @@ const homePage = () => {
   ];
 
   return shell({
-    title: "Bugman Plus | Premium Pest Control in Oshawa & Durham Region",
+    title: "Bugman Plus | Premium Pest Control in Durham Region & GTA",
     description:
-      "Bugman Plus provides Durham Region pest control in Oshawa, Whitby, Ajax, Pickering, Clarington, Bowmanville, Courtice, Brooklin, Port Perry, Scugog, Uxbridge, Brock, and nearby communities.",
+      `Bugman Plus provides pest control in ${serviceAreaSummary} for bed bugs, rodents, wasps, ants, cockroaches, spiders, flies, pantry pests, and seasonal insects.`,
     path: "/",
     active: "home",
     schema: [localBusinessSchema(), webSiteSchema(), faqSchema(faqs)],
@@ -1286,8 +1349,8 @@ const homePage = () => {
       <section class="section location-section">
         <div class="section-heading reveal">
           <p class="section-kicker">Service Areas</p>
-          <h2>Pest control coverage for every priority service area.</h2>
-          <p>Find focused pages for Oshawa, Whitby, Ajax, Pickering, Clarington, Bowmanville, Courtice, Newcastle, Brooklin, Port Perry, Scugog, Uxbridge, Brock, and Durham Region.</p>
+          <h2>Pest control coverage across Durham Region and the GTA.</h2>
+          <p>Find focused pages for ${serviceAreaSummary}.</p>
         </div>
         ${locationLinks()}
       </section>
@@ -1364,9 +1427,9 @@ const aboutPage = () =>
 
 const servicesPage = () =>
   shell({
-    title: "Pest Control Services | Bugman Plus Durham Region",
+    title: "Pest Control Services | Bugman Plus Durham Region & GTA",
     description:
-      "Explore 20 Bugman Plus pest control services for bed bugs, mice, rats, cockroaches, ants, wasps, spiders, fleas, mosquitoes, flies, pantry pests, and seasonal insects across Durham Region.",
+      `Explore 20 Bugman Plus pest control services for bed bugs, mice, rats, cockroaches, ants, wasps, spiders, fleas, mosquitoes, flies, pantry pests, and seasonal insects across ${serviceAreaSummary}.`,
     path: "/services/",
     active: "services",
     schema: [
@@ -1414,8 +1477,8 @@ const servicesPage = () =>
 
 const servicePage = (service) =>
   shell({
-    title: `${service.title} | Bugman Plus Durham Region Pest Control`,
-    description: `${service.intro} Available in Oshawa, Whitby, Ajax, Pickering, Clarington, Bowmanville, Courtice, Newcastle, Brooklin, Port Perry, Scugog, Uxbridge, Brock, and Durham Region.`,
+    title: `${service.title} | Bugman Plus Durham Region & GTA Pest Control`,
+    description: `${service.intro} Available in ${serviceAreaSummary}.`,
     path: `/services/${service.slug}/`,
     active: "services",
     image: service.image,
@@ -1434,7 +1497,7 @@ const servicePage = (service) =>
         <img src="${service.image}" alt="${service.alt}" width="1800" height="1200">
         <div class="subhero-content reveal">
           <p class="eyebrow">Pest Control Service</p>
-          <h1>${service.title} in Durham Region</h1>
+          <h1>${service.title} in Durham Region & the GTA</h1>
           <p>${service.intro}</p>
           <div class="hero-actions">
             <a class="button" href="/quote/?service=${service.slug}">Request ${service.shortTitle} Service</a>
@@ -1477,8 +1540,8 @@ const servicePage = (service) =>
 
 const locationPage = (location) =>
   shell({
-    title: `Pest Control in ${location.name}, ${location.region} | Durham Region Exterminator`,
-    description: `Bugman Plus provides Durham Region pest control in ${location.name}, ${location.region} for bed bugs, mice, rats, cockroaches, ants, wasps, spiders, flies, pantry pests, and seasonal insects.`,
+    title: `Pest Control in ${location.name}, ${location.region} | ${locationMarketLabel(location)}`,
+    description: `Bugman Plus provides pest control in ${location.name}, ${location.region} for bed bugs, mice, rats, cockroaches, ants, wasps, spiders, flies, pantry pests, and seasonal insects.`,
     path: `/locations/${location.slug}/`,
     active: "areas",
     schema: [
@@ -1530,9 +1593,9 @@ const locationPage = (location) =>
 
 const locationsPage = () =>
   shell({
-    title: "Durham Region Pest Control Service Areas | Bugman Plus",
+    title: "Pest Control Service Areas | Bugman Plus Durham Region & GTA",
     description:
-      "Find Bugman Plus pest control service area pages for Oshawa, Whitby, Ajax, Pickering, Clarington, Bowmanville, Courtice, Newcastle, Brooklin, Port Perry, Scugog, Uxbridge, Brock, and Durham Region.",
+      `Find Bugman Plus pest control service area pages for ${serviceAreaSummary}.`,
     path: "/locations/",
     active: "areas",
     schema: [
@@ -1544,7 +1607,7 @@ const locationsPage = () =>
         <img src="${assets.hero}" alt="Bugman Plus pest control service area background" width="1800" height="1315">
         <div class="subhero-content reveal">
           <p class="eyebrow">Service Areas</p>
-          <h1>Pest control across Durham Region.</h1>
+          <h1>Pest control across Durham Region and the GTA.</h1>
           <p>Choose a location to find service pages for bed bugs, mice, rats, cockroaches, ants, wasps, spiders, flies, pantry pests, and seasonal invaders.</p>
         </div>
       </section>
@@ -1558,9 +1621,9 @@ const locationsPage = () =>
       </section>
       <section class="section keyword-section">
         <div class="section-heading reveal">
-          <p class="section-kicker">Durham Keyword Focus</p>
+          <p class="section-kicker">Location Keyword Focus</p>
           <h2>Search language built around local pest control intent.</h2>
-          <p>The main programmatic structure now concentrates on Durham Region pest control, local exterminator, city-specific service, and high-ROI pest keywords.</p>
+          <p>The main programmatic structure concentrates on Durham Region and GTA pest control, local exterminator, city-specific service, and high-ROI pest keywords.</p>
         </div>
         ${keywordClusters()}
       </section>
@@ -1579,8 +1642,8 @@ const locationsPage = () =>
 
 const locationServicePage = (location, service) =>
   shell({
-    title: `${service.title} in ${location.name}, ${location.region} | Durham Region Exterminator`,
-    description: `Need ${service.title.toLowerCase()} in ${location.name}, ${location.region}? Bugman Plus provides focused Durham Region pest inspection and treatment programs for homes, rentals, restaurants, offices, and commercial properties.`,
+    title: `${service.title} in ${location.name}, ${location.region} | ${locationMarketLabel(location)}`,
+    description: locationServiceDescription(location, service),
     path: `/locations/${location.slug}/${service.slug}/`,
     active: "areas",
     image: service.image,
@@ -1636,9 +1699,9 @@ const locationServicePage = (location, service) =>
 
 const contactPage = () =>
   shell({
-    title: "Contact Bugman Plus | Durham Region Pest Control",
+    title: "Contact Bugman Plus | Durham Region & GTA Pest Control",
     description:
-      "Contact Bugman Plus for Durham Region pest control in Oshawa, Whitby, Ajax, Pickering, Clarington, Bowmanville, Brooklin, Port Perry, Scugog, Uxbridge, and Brock. Call 905-924-2847.",
+      `Contact Bugman Plus for pest control in ${serviceAreaSummary}. Call 905-924-2847.`,
     path: "/contact/",
     active: "contact",
     schema: [
@@ -1662,7 +1725,7 @@ const contactPage = () =>
             <a href="tel:${site.phoneHref}">${site.phone}</a>
             <a href="mailto:${site.email}">${site.email}</a>
           </div>
-          <p>Based in Oshawa, Ontario. Serving Durham Region service areas with focused residential and commercial pest control.</p>
+          <p>Based in Oshawa, Ontario. Serving Durham Region and GTA service areas with focused residential and commercial pest control.</p>
         </div>
         ${quoteForm("Contact page request")}
       </section>
@@ -1673,7 +1736,7 @@ const quotePage = () =>
   shell({
     title: "Get a Pest Control Quote | Bugman Plus",
     description:
-      "Request a Bugman Plus pest control quote for Oshawa, Whitby, Ajax, Pickering, Clarington, Bowmanville, Courtice, Brooklin, Port Perry, Scugog, Uxbridge, Brock, and Durham Region.",
+      `Request a Bugman Plus pest control quote for ${serviceAreaSummary}.`,
     path: "/quote/",
     active: "contact",
     schema: [

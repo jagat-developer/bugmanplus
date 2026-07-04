@@ -27,13 +27,25 @@ const assets = {
   about: versionedAsset("/assets/images/about-technician.jpg"),
 };
 
+const serviceImages = {
+  bedBug: versionedAsset("/assets/images/bed-bug-control.jpg"),
+  rodent: versionedAsset("/assets/images/rodent-control.jpg"),
+  stinging: versionedAsset("/assets/images/spider-wasp-control.jpg"),
+  ant: versionedAsset("/assets/images/ant-control.jpg"),
+  cockroach: versionedAsset("/assets/images/cockroach-control.jpg"),
+  insect: versionedAsset("/assets/images/other-bug-control.jpg"),
+};
+
 const services = [
   {
     slug: "bed-bug-control",
     title: "Bed Bug Control",
     shortTitle: "Bed Bugs",
-    image: versionedAsset("/assets/images/bed-bug-control.jpg"),
-    alt: "Close-up service photo for bed bug pest control",
+    image: serviceImages.bedBug,
+    alt: "Detailed service photo for bed bug control",
+    demand: "Highest demand",
+    season: "All year",
+    covers: ["Bed bugs", "Bat bugs", "Biting pest inspection"],
     intro:
       "Discreet inspection and treatment programs for active bed bug concerns in homes, apartments, and rental properties.",
     summary:
@@ -57,43 +69,87 @@ const services = [
     keywords: ["bed bug control", "bed bug exterminator", "bed bug treatment"],
   },
   {
-    slug: "spider-wasp-control",
-    title: "Spider & Wasp Control",
-    shortTitle: "Spiders & Wasps",
-    image: versionedAsset("/assets/images/spider-wasp-control.jpg"),
-    alt: "Service photo for spider and wasp control",
+    slug: "mouse-control",
+    title: "Mouse Control",
+    shortTitle: "Mice",
+    image: serviceImages.rodent,
+    alt: "Service photo for mouse control",
+    demand: "Highest demand",
+    season: "All year, highest in fall and winter",
     intro:
-      "Exterior and entry-point treatments for spiders, wasps, and nesting insects around homes and businesses.",
+      "Mouse inspection, control, and prevention programs for homes, restaurants, offices, warehouses, and rental properties.",
     summary:
-      "Reduce webbing, nesting, and seasonal pressure with careful perimeter service and targeted nest attention.",
-    signs: ["Recurring webs", "Nest activity around eaves", "Wasps near decks", "Entry points around soffits"],
+      "Find entry routes, reduce active mouse pressure, and protect the structure from repeat movement.",
+    covers: ["House mice", "Deer mice", "Interior rodent pressure", "Garage and basement activity"],
+    signs: ["Small droppings", "Scratching at night", "Chewed packaging", "Activity near kitchens or utility rooms"],
     process: [
-      "Identify harborage, nesting areas, and exterior pressure points.",
-      "Treat problem zones while paying attention to access, safety, and seasonality.",
-      "Recommend exclusion and maintenance steps to reduce repeat pressure.",
+      "Inspect foundations, doors, vents, utility penetrations, storage zones, and interior travel paths.",
+      "Build a control plan around activity level, sanitation needs, and the layout of the building.",
+      "Recommend exclusion and cleanup steps to reduce the chance of mice returning.",
     ],
     faq: [
       {
-        q: "Can wasp nests be handled safely?",
-        a: "Yes. Professional treatment limits direct exposure and uses the right approach for the nest location.",
+        q: "How do mice get into a home?",
+        a: "Mice can use small gaps around doors, foundations, vents, siding, garages, and utility penetrations.",
       },
       {
-        q: "Will spider service also help with webs?",
-        a: "A proper exterior program targets the areas where spiders build and return, helping reduce visible webbing.",
+        q: "Is mouse control just traps?",
+        a: "No. Traps may be part of the plan, but inspection, entry-point awareness, sanitation, and follow-up make the program stronger.",
       },
     ],
-    keywords: ["spider control", "wasp control", "wasp nest removal"],
+    keywords: ["mouse control", "mice exterminator", "mouse removal"],
+  },
+  {
+    slug: "rat-control",
+    title: "Rat Control",
+    shortTitle: "Rats",
+    image: serviceImages.rodent,
+    alt: "Service photo for rat control",
+    demand: "High demand",
+    season: "All year",
+    intro:
+      "Rat control programs for exterior burrows, garbage pressure, commercial sites, laneways, sheds, garages, and building edges.",
+    summary:
+      "Identify food, shelter, and travel routes so the rat control plan addresses the property conditions that keep activity active.",
+    covers: ["Norway rats", "Roof rats", "Burrow activity", "Commercial rodent pressure"],
+    signs: ["Burrows", "Large droppings", "Gnaw marks", "Pathways along walls or fences"],
+    process: [
+      "Inspect exterior routes, waste areas, foundation gaps, burrows, and high-pressure edges.",
+      "Set a control strategy matched to the site, safety needs, and surrounding activity.",
+      "Recommend sanitation, storage, and exclusion improvements that make the property less attractive.",
+    ],
+    faq: [
+      {
+        q: "Why are rats active around buildings?",
+        a: "Rats look for food, water, shelter, and quiet travel routes. Dense urban areas can provide all of those conditions.",
+      },
+      {
+        q: "Do rats need a different plan than mice?",
+        a: "Yes. Rats are larger, use different travel routes, and often require more exterior investigation and sanitation planning.",
+      },
+    ],
+    keywords: ["rat control", "rat removal", "rat exterminator"],
   },
   {
     slug: "cockroach-control",
     title: "Cockroach Control",
     shortTitle: "Cockroaches",
-    image: versionedAsset("/assets/images/cockroach-control.jpg"),
+    image: serviceImages.cockroach,
     alt: "Service photo for cockroach pest control",
+    demand: "Highest demand",
+    season: "All year",
     intro:
       "Kitchen, bathroom, and utility-area programs for cockroach activity in residential and commercial spaces.",
     summary:
       "Focused treatment and sanitation guidance for the warm, hidden spaces cockroaches use to spread.",
+    covers: [
+      "German cockroaches",
+      "American cockroaches",
+      "Oriental cockroaches",
+      "Brown-banded cockroaches",
+      "Smokybrown cockroaches",
+      "Water bugs",
+    ],
     signs: ["Night activity", "Droppings in cabinets", "Odor in warm spaces", "Activity near appliances"],
     process: [
       "Inspect moisture, heat, storage, appliance, and plumbing zones.",
@@ -116,12 +172,24 @@ const services = [
     slug: "ant-control",
     title: "Ant Control",
     shortTitle: "Ants",
-    image: versionedAsset("/assets/images/ant-control.jpg"),
+    image: serviceImages.ant,
     alt: "Service photo for ant pest control",
+    demand: "Highest demand",
+    season: "Spring to summer",
     intro:
       "Interior and exterior ant treatment programs for trails, entry points, kitchens, patios, and structural gaps.",
     summary:
       "Track ant movement, treat the source, and reduce access points that keep colonies feeding indoors.",
+    covers: [
+      "Pavement ants",
+      "Pharaoh ants",
+      "Odorous house ants",
+      "Argentine ants",
+      "Acrobat ants",
+      "Field ants",
+      "Thief ants",
+      "Moisture ants",
+    ],
     signs: ["Kitchen trails", "Ants around patios", "Entry near windows", "Activity after rain"],
     process: [
       "Trace movement from interior trails back toward entry and nesting areas.",
@@ -141,60 +209,469 @@ const services = [
     keywords: ["ant control", "ant exterminator", "house ant treatment"],
   },
   {
-    slug: "other-bug-control",
-    title: "All Other Bug Control",
-    shortTitle: "Other Bugs",
-    image: versionedAsset("/assets/images/other-bug-control.jpg"),
-    alt: "Service photo for general insect control",
+    slug: "wasp-nest-removal",
+    title: "Wasp Nest Removal",
+    shortTitle: "Wasps",
+    image: serviceImages.stinging,
+    alt: "Service photo for wasp nest removal",
+    demand: "Highest demand",
+    season: "Spring to fall",
     intro:
-      "Practical inspection and treatment for nuisance insects that do not fit neatly into a standard category.",
+      "Professional wasp and yellowjacket nest service for eaves, decks, sheds, soffits, wall voids, and ground nests.",
     summary:
-      "Identify the pest, understand why it is present, and apply the right level of treatment for the situation.",
-    signs: ["Unknown insect activity", "Seasonal indoor invaders", "Basement or garage pests", "Recurring sightings"],
+      "Treat active nests with the right timing and safety plan so outdoor spaces can be used with confidence again.",
+    covers: ["Paper wasps", "Yellowjackets", "Bald-faced hornets", "Mud daubers", "Ground wasps"],
+    signs: ["Repeated wasp traffic", "Visible paper nests", "Ground nest entry holes", "Stinging insects near doors or decks"],
     process: [
-      "Identify the insect and the conditions attracting it.",
-      "Build a targeted plan instead of applying a generic blanket treatment.",
-      "Provide prevention guidance for the pest's likely entry and breeding conditions.",
+      "Identify the species, nest location, traffic pattern, and nearby safety concerns.",
+      "Treat the nest area using an approach matched to the location and activity level.",
+      "Review prevention steps for entry points, food sources, and future nesting pressure.",
     ],
     faq: [
       {
-        q: "What if I do not know what insect I have?",
-        a: "That is common. A proper inspection starts by identifying the pest so treatment is matched to the issue.",
+        q: "Should I remove a wasp nest myself?",
+        a: "A visible nest near people, pets, doors, decks, or work areas is safer to handle professionally, especially when traffic is heavy.",
       },
       {
-        q: "Do you handle seasonal insects?",
-        a: "Yes. Bugman Plus can help with many common seasonal pests found in Ontario homes and businesses.",
+        q: "When is wasp activity highest?",
+        a: "In Ontario, nest calls usually build from spring through fall, with mature nests becoming more noticeable later in the season.",
       },
     ],
-    keywords: ["bug control", "insect control", "general pest control"],
+    keywords: ["wasp nest removal", "wasp control", "yellowjacket control"],
   },
   {
-    slug: "rodent-control",
-    title: "Rodent Control",
-    shortTitle: "Rodents",
-    image: versionedAsset("/assets/images/rodent-control.jpg"),
-    alt: "Service photo for rodent control",
+    slug: "spider-control",
+    title: "Spider Control",
+    shortTitle: "Spiders",
+    image: serviceImages.stinging,
+    alt: "Service photo for spider control",
+    demand: "High demand",
+    season: "All year",
     intro:
-      "Rodent inspection, control, and prevention programs for mice and rat activity around buildings.",
+      "Interior and exterior spider control for recurring webs, basement activity, garages, sheds, and perimeter pressure.",
     summary:
-      "Find access routes, treat active pressure, and help close the conditions that allow rodents to return.",
-    signs: ["Droppings", "Scratching sounds", "Chewed materials", "Activity in garages or basements"],
+      "Reduce webbing and spider activity by targeting shelter zones, entry points, and the insects that help sustain spider pressure.",
+    covers: ["House spiders", "Cellar spiders", "Exterior webbing", "Garage and basement activity"],
+    signs: ["Recurring webs", "Spiders near windows", "Basement sightings", "Activity around lights or insects"],
     process: [
-      "Inspect foundations, doors, utility penetrations, storage zones, and exterior paths.",
-      "Set a control plan around the active pressure and the property layout.",
-      "Recommend exclusion and cleanup steps to reduce long-term risk.",
+      "Inspect exterior lights, siding, windows, garages, basements, and sheltered corners.",
+      "Treat selected activity zones and reduce web-heavy return points.",
+      "Recommend sealing, lighting, clutter, and moisture adjustments that lower insect pressure.",
     ],
     faq: [
       {
-        q: "How do rodents get inside?",
-        a: "Rodents use small gaps around foundations, doors, vents, utility lines, and attached structures.",
+        q: "Will spider service remove every spider?",
+        a: "No service can guarantee that every spider will disappear, but targeted treatment can greatly reduce recurring activity and webbing.",
       },
       {
-        q: "Is rodent control just baiting?",
-        a: "No. A stronger plan combines treatment with inspection, entry-point awareness, and prevention guidance.",
+        q: "Why do spiders keep coming back?",
+        a: "Spiders return where shelter and prey insects are available, especially around lights, cracks, clutter, and protected edges.",
       },
     ],
-    keywords: ["rodent control", "mouse control", "rat control"],
+    keywords: ["spider control", "spider exterminator", "web removal"],
+  },
+  {
+    slug: "flea-control",
+    title: "Flea Control",
+    shortTitle: "Fleas",
+    image: serviceImages.insect,
+    alt: "Service photo for flea control",
+    demand: "High demand",
+    season: "Spring to fall",
+    intro:
+      "Flea treatment support for homes with pet activity, wildlife pressure, recurring bites, and carpet or upholstered areas.",
+    summary:
+      "Treat active flea zones while coordinating preparation, vacuuming, pet care, and follow-up timing.",
+    covers: ["Fleas", "Biting pest inspection", "Pet-associated activity"],
+    signs: ["Bites around ankles", "Pets scratching", "Fleas in carpets", "Activity after wildlife or pet exposure"],
+    process: [
+      "Inspect sleeping areas, carpets, furniture, pet routes, and likely transfer zones.",
+      "Treat active areas with attention to preparation and product timing.",
+      "Provide follow-up guidance for vacuuming, pet treatment, and reinfestation prevention.",
+    ],
+    faq: [
+      {
+        q: "Do pets need to be treated too?",
+        a: "Yes. Flea control works best when veterinary pet treatment, cleaning, and structural treatment are coordinated.",
+      },
+      {
+        q: "Why do fleas appear after treatment?",
+        a: "Flea life stages can emerge after the first service, which is why preparation and follow-up timing matter.",
+      },
+    ],
+    keywords: ["flea control", "flea treatment", "flea exterminator"],
+  },
+  {
+    slug: "mosquito-control",
+    title: "Mosquito Control",
+    shortTitle: "Mosquitoes",
+    image: serviceImages.insect,
+    alt: "Service photo for mosquito control",
+    demand: "Very common",
+    season: "Spring to fall",
+    intro:
+      "Outdoor mosquito control and breeding-site guidance for backyards, patios, event areas, and shaded wet zones.",
+    summary:
+      "Reduce mosquito pressure by treating resting areas and removing the standing water conditions where mosquitoes breed.",
+    covers: ["Mosquitoes", "Biting fly pressure", "Outdoor nuisance biting pests"],
+    signs: ["Bites outdoors", "Standing water", "Heavy activity at dusk", "Shaded damp resting areas"],
+    process: [
+      "Inspect standing water, shaded vegetation, drains, containers, and outdoor seating areas.",
+      "Treat selected resting zones and recommend breeding-site reduction.",
+      "Plan repeat service around warm-season activity and property use.",
+    ],
+    faq: [
+      {
+        q: "What creates mosquito pressure?",
+        a: "Standing water, shade, humidity, and nearby breeding sites can create persistent mosquito pressure.",
+      },
+      {
+        q: "When is mosquito service most useful?",
+        a: "Mosquito programs are most useful during the warm season, especially before outdoor gatherings or recurring backyard use.",
+      },
+    ],
+    keywords: ["mosquito control", "mosquito treatment", "backyard mosquito control"],
+  },
+  {
+    slug: "carpenter-ant-control",
+    title: "Carpenter Ant Control",
+    shortTitle: "Carpenter Ants",
+    image: serviceImages.ant,
+    alt: "Service photo for carpenter ant control",
+    demand: "Very common",
+    season: "Spring to summer",
+    intro:
+      "Carpenter ant inspection and treatment for structural wood, moisture-damaged areas, exterior wood, decks, and satellite nests.",
+    summary:
+      "Locate the activity source and correct the moisture or wood conditions that let carpenter ants establish pressure.",
+    covers: ["Carpenter ants", "Moisture-related ant activity", "Wood-associated ants"],
+    signs: ["Large black ants", "Frass or sawdust", "Winged ants indoors", "Activity near damp wood"],
+    process: [
+      "Inspect moisture zones, wood contact, trees, decks, wall voids, and interior sightings.",
+      "Treat the colony pressure and likely satellite nest routes.",
+      "Recommend wood repair, moisture correction, and vegetation changes that reduce future risk.",
+    ],
+    faq: [
+      {
+        q: "Do carpenter ants eat wood?",
+        a: "Carpenter ants excavate wood for nesting instead of eating it, and moisture-damaged wood is a common attraction.",
+      },
+      {
+        q: "Why are winged ants a concern?",
+        a: "Winged ants indoors can suggest an established colony or nearby nesting pressure that deserves inspection.",
+      },
+    ],
+    keywords: ["carpenter ant control", "carpenter ant exterminator", "black ant control"],
+  },
+  {
+    slug: "carpenter-bee-control",
+    title: "Carpenter Bee Control",
+    shortTitle: "Carpenter Bees",
+    image: serviceImages.stinging,
+    alt: "Service photo for carpenter bee control",
+    demand: "High-value seasonal",
+    season: "Spring to summer",
+    intro:
+      "Carpenter bee control for decks, fascia, trim, railings, pergolas, sheds, and exposed wood where round entry holes appear.",
+    summary:
+      "Treat active galleries and protect vulnerable wood surfaces from repeat boring activity.",
+    covers: ["Carpenter bees", "Wood-boring bee activity", "Deck and fascia pressure"],
+    signs: ["Round holes in wood", "Sawdust below openings", "Large hovering bees", "Staining under galleries"],
+    process: [
+      "Inspect exposed wood, entry holes, staining, sawdust, and recurring hover zones.",
+      "Treat active galleries and recommend timing for sealing after activity is controlled.",
+      "Provide prevention guidance for painting, sealing, and protecting exposed wood.",
+    ],
+    faq: [
+      {
+        q: "Are carpenter bees the same as bumblebees?",
+        a: "They can look similar, but carpenter bees bore into wood and usually require a different control and prevention plan.",
+      },
+      {
+        q: "Can I seal carpenter bee holes right away?",
+        a: "Sealing too early can trap activity inside. Treatment and timing should come before permanent sealing.",
+      },
+    ],
+    keywords: ["carpenter bee control", "carpenter bee removal", "wood boring bee control"],
+  },
+  {
+    slug: "fruit-fly-control",
+    title: "Fruit Fly Control",
+    shortTitle: "Fruit Flies",
+    image: serviceImages.insect,
+    alt: "Service photo for fruit fly control",
+    demand: "Very common",
+    season: "Spring to fall",
+    intro:
+      "Fruit fly control for kitchens, restaurants, bars, break rooms, garbage areas, produce storage, and drains.",
+    summary:
+      "Locate breeding sources and sanitation gaps so treatment is matched to where fruit flies are actually developing.",
+    covers: ["Fruit flies", "Small fly pressure", "Bar and kitchen fly activity"],
+    signs: ["Small flies near produce", "Activity around bins", "Flies near drains", "Recurring kitchen sightings"],
+    process: [
+      "Inspect produce, waste, recycling, floor drains, beverage lines, and wet organic buildup.",
+      "Treat breeding zones and recommend cleaning steps that remove the source.",
+      "Set monitoring and prevention habits for recurring food-service or residential areas.",
+    ],
+    faq: [
+      {
+        q: "Why do fruit flies keep returning?",
+        a: "They return when organic buildup, damp residues, produce, or waste areas continue to support breeding.",
+      },
+      {
+        q: "Is fruit fly control different from drain fly control?",
+        a: "Yes. Identification matters because the breeding source and treatment path can be different.",
+      },
+    ],
+    keywords: ["fruit fly control", "fruit fly treatment", "small fly control"],
+  },
+  {
+    slug: "drain-fly-control",
+    title: "Drain Fly Control",
+    shortTitle: "Drain Flies",
+    image: serviceImages.insect,
+    alt: "Service photo for drain fly control",
+    demand: "Very common",
+    season: "All year",
+    intro:
+      "Drain fly inspection and treatment for floor drains, sink drains, mechanical rooms, restaurants, basements, and damp utility spaces.",
+    summary:
+      "Trace drain fly breeding to organic buildup, slow drains, moisture, and hard-to-clean wet zones.",
+    covers: ["Drain flies", "Moth flies", "Small fly pressure", "Moisture-related fly activity"],
+    signs: ["Tiny moth-like flies", "Activity near drains", "Flies in bathrooms", "Recurring damp-area sightings"],
+    process: [
+      "Inspect drains, traps, sump areas, cracked pipes, and wet organic buildup.",
+      "Treat breeding material and support the cleaning work needed to break the cycle.",
+      "Recommend moisture and maintenance steps to keep drains from rebuilding pressure.",
+    ],
+    faq: [
+      {
+        q: "Do drain flies always come from drains?",
+        a: "Often, but they can also come from other damp organic buildup, cracked plumbing, or wet utility spaces.",
+      },
+      {
+        q: "Will spraying the air solve drain flies?",
+        a: "No. The breeding source needs to be found and treated or the activity usually returns.",
+      },
+    ],
+    keywords: ["drain fly control", "moth fly treatment", "small fly exterminator"],
+  },
+  {
+    slug: "cluster-fly-control",
+    title: "Cluster Fly Control",
+    shortTitle: "Cluster Flies",
+    image: serviceImages.insect,
+    alt: "Service photo for cluster fly control",
+    demand: "Very common",
+    season: "Fall and spring",
+    intro:
+      "Cluster fly service for attics, upper floors, windows, wall voids, and overwintering pressure in homes and cottages.",
+    summary:
+      "Treat and prevent seasonal fly pressure where cluster flies enter structures to overwinter and reappear when temperatures shift.",
+    covers: ["Cluster flies", "Blow flies", "Overwintering fly pressure"],
+    signs: ["Flies at sunny windows", "Activity in upper rooms", "Attic sightings", "Spring re-emergence"],
+    process: [
+      "Inspect upper walls, attic access, windows, siding gaps, and seasonal entry points.",
+      "Treat active or likely pressure zones with attention to timing.",
+      "Recommend sealing and exterior prevention before fall entry pressure builds.",
+    ],
+    faq: [
+      {
+        q: "Why do cluster flies appear in winter or spring?",
+        a: "They often overwinter in protected spaces and become visible indoors when warmth changes their activity.",
+      },
+      {
+        q: "When should cluster fly prevention happen?",
+        a: "Prevention is strongest before fall entry pressure, but active indoor issues can still be assessed.",
+      },
+    ],
+    keywords: ["cluster fly control", "cluster fly treatment", "overwintering fly control"],
+  },
+  {
+    slug: "silverfish-control",
+    title: "Silverfish Control",
+    shortTitle: "Silverfish",
+    image: serviceImages.insect,
+    alt: "Service photo for silverfish control",
+    demand: "Very common",
+    season: "All year",
+    intro:
+      "Silverfish control for bathrooms, basements, closets, storage rooms, bookshelves, and damp hidden spaces.",
+    summary:
+      "Treat silverfish hiding areas while improving moisture, storage, and crack conditions that support activity.",
+    covers: ["Silverfish", "Firebrats", "Booklice inspection"],
+    signs: ["Fast silver insects", "Activity in bathrooms", "Paper or fabric damage", "Sightings near damp storage"],
+    process: [
+      "Inspect moisture, storage, baseboards, closets, bathrooms, and paper-heavy areas.",
+      "Treat cracks, voids, and travel zones where silverfish hide.",
+      "Recommend humidity reduction, storage changes, and sealing steps.",
+    ],
+    faq: [
+      {
+        q: "Why are silverfish in bathrooms?",
+        a: "Silverfish like moisture, shelter, and access to starchy materials, so bathrooms and storage areas are common.",
+      },
+      {
+        q: "Can silverfish damage belongings?",
+        a: "They can damage paper, books, wallpaper, fabrics, and stored materials when activity is left unchecked.",
+      },
+    ],
+    keywords: ["silverfish control", "silverfish exterminator", "firebrat control"],
+  },
+  {
+    slug: "carpet-beetle-control",
+    title: "Carpet Beetle Control",
+    shortTitle: "Carpet Beetles",
+    image: serviceImages.insect,
+    alt: "Service photo for carpet beetle control",
+    demand: "Very common",
+    season: "All year",
+    intro:
+      "Carpet beetle inspection and treatment for closets, carpets, rugs, upholstery, stored fabrics, and hidden lint buildup.",
+    summary:
+      "Find larval feeding areas and treat the cracks, textile zones, and storage conditions where carpet beetles persist.",
+    covers: ["Carpet beetles", "Dermestid beetles", "Fabric pest inspection"],
+    signs: ["Larvae or shed skins", "Damage to wool or fabrics", "Small beetles at windows", "Activity in closets"],
+    process: [
+      "Inspect textile storage, rugs, closets, baseboards, vents, pet hair, and lint-heavy areas.",
+      "Treat selected harborages and feeding zones.",
+      "Recommend cleaning, laundering, storage, and monitoring steps to prevent recurrence.",
+    ],
+    faq: [
+      {
+        q: "Do carpet beetles only live in carpets?",
+        a: "No. They can feed on natural fibers, lint, hair, feathers, stored textiles, and hidden debris.",
+      },
+      {
+        q: "Why am I seeing beetles at windows?",
+        a: "Adults are attracted to light and may appear at windows even when larvae are feeding elsewhere.",
+      },
+    ],
+    keywords: ["carpet beetle control", "carpet beetle treatment", "fabric pest control"],
+  },
+  {
+    slug: "pantry-pest-control",
+    title: "Pantry Pest Control",
+    shortTitle: "Pantry Pests",
+    image: serviceImages.insect,
+    alt: "Service photo for pantry pest control",
+    demand: "Very common",
+    season: "All year",
+    intro:
+      "Pantry pest control for moths, beetles, weevils, flour products, grain products, pet food, and dry-food storage.",
+    summary:
+      "Identify the infested product source, remove contaminated food, and treat storage areas so pantry pests do not keep spreading.",
+    covers: ["Indian meal moths", "Grain beetles", "Flour beetles", "Weevils", "Pantry moths"],
+    signs: ["Moths in cupboards", "Webbing in food", "Small beetles in flour", "Larvae in stored products"],
+    process: [
+      "Inspect dry goods, pet food, spices, grains, cupboards, shelves, and packaging seams.",
+      "Identify and remove the source while treating cracks and storage zones.",
+      "Recommend airtight storage, rotation, and monitoring practices.",
+    ],
+    faq: [
+      {
+        q: "Do I need to throw everything away?",
+        a: "Not always. The goal is to identify infested items, dispose of contaminated product, and protect clean food in sealed containers.",
+      },
+      {
+        q: "Can pantry moths spread between cupboards?",
+        a: "Yes. Larvae and adults can move through nearby storage areas, which is why a full inspection matters.",
+      },
+    ],
+    keywords: ["pantry pest control", "pantry moth control", "weevil treatment"],
+  },
+  {
+    slug: "earwig-control",
+    title: "Earwig Control",
+    shortTitle: "Earwigs",
+    image: serviceImages.insect,
+    alt: "Service photo for earwig control",
+    demand: "Very common",
+    season: "Spring to fall",
+    intro:
+      "Earwig control for damp exterior edges, basements, garages, patios, gardens, door thresholds, and lower-level rooms.",
+    summary:
+      "Reduce earwig entry by treating moisture-heavy exterior zones and the cracks that let them move indoors.",
+    covers: ["Earwigs", "Moisture pests", "Seasonal crawling insects"],
+    signs: ["Earwigs indoors", "Activity after rain", "Basement sightings", "Harborage under mulch or debris"],
+    process: [
+      "Inspect moisture, mulch, foundation edges, door thresholds, garages, and basement access points.",
+      "Treat active harborage and entry zones.",
+      "Recommend moisture, debris, and sealing changes that reduce repeat entry.",
+    ],
+    faq: [
+      {
+        q: "Why are earwigs coming inside?",
+        a: "Earwigs often move indoors from damp exterior areas, especially after wet weather or when shelter is available near entry points.",
+      },
+      {
+        q: "Are earwigs a structural pest?",
+        a: "No. They are usually a nuisance pest, but recurring indoor activity still needs source and entry-point control.",
+      },
+    ],
+    keywords: ["earwig control", "earwig treatment", "earwig exterminator"],
+  },
+  {
+    slug: "stink-bug-control",
+    title: "Stink Bug Control",
+    shortTitle: "Stink Bugs",
+    image: serviceImages.insect,
+    alt: "Service photo for stink bug control",
+    demand: "Seasonal invader",
+    season: "Fall and spring",
+    intro:
+      "Stink bug and seasonal invader control for exterior walls, sunny windows, attics, siding gaps, and overwintering entry points.",
+    summary:
+      "Reduce seasonal entry pressure before stink bugs and related invaders settle into protected spaces.",
+    covers: ["Brown marmorated stink bugs", "Boxelder bugs", "Asian lady beetles", "Elm seed bugs", "Pine seed bugs"],
+    signs: ["Bugs at sunny windows", "Fall wall activity", "Odor when crushed", "Spring indoor re-emergence"],
+    process: [
+      "Inspect exterior walls, window frames, siding gaps, attic edges, and sun-facing entry points.",
+      "Treat selected exterior or entry zones at the right seasonal timing.",
+      "Recommend sealing and exclusion steps before fall pressure returns.",
+    ],
+    faq: [
+      {
+        q: "Why do stink bugs show up indoors in spring?",
+        a: "They may overwinter in wall voids or protected spaces and become visible again when temperatures change.",
+      },
+      {
+        q: "When should seasonal invader prevention happen?",
+        a: "Late summer to fall prevention is usually best because many invaders are trying to enter before winter.",
+      },
+    ],
+    keywords: ["stink bug control", "seasonal invader control", "boxelder bug control"],
+  },
+  {
+    slug: "house-fly-control",
+    title: "House Fly Control",
+    shortTitle: "House Flies",
+    image: serviceImages.insect,
+    alt: "Service photo for house fly control",
+    demand: "Very common",
+    season: "Spring to fall",
+    intro:
+      "House fly control for restaurants, garbage rooms, kitchens, commercial sites, food-handling spaces, and homes.",
+    summary:
+      "Identify breeding sources and sanitation gaps so fly treatment supports food safety, comfort, and prevention.",
+    covers: ["House flies", "Blow flies", "Fungus gnats", "Flies from dead animal sources"],
+    signs: ["Flies around waste", "Activity near food areas", "Flies at windows", "Recurring indoor fly pressure"],
+    process: [
+      "Inspect waste handling, drains, doors, loading areas, food storage, and possible breeding sources.",
+      "Treat active fly pressure and support sanitation or exclusion improvements.",
+      "Recommend monitoring and maintenance steps for high-traffic commercial or residential spaces.",
+    ],
+    faq: [
+      {
+        q: "Why do house flies keep coming back?",
+        a: "They often return when waste, organic residue, door gaps, or breeding sources remain active.",
+      },
+      {
+        q: "Can fly control help food businesses?",
+        a: "Yes. Professional fly control can support sanitation, monitoring, and prevention programs for food premises.",
+      },
+    ],
+    keywords: ["house fly control", "fly control", "commercial fly treatment"],
   },
 ];
 
@@ -224,17 +701,107 @@ const locations = [
     descriptor: "a Durham Region market with homes, townhomes, businesses, and waterfront properties",
   },
   {
+    slug: "durham-region",
+    name: "Durham Region",
+    region: "ON",
+    schemaType: "AdministrativeArea",
+    descriptor: "the broader service area for homeowners, landlords, and businesses east of Toronto",
+  },
+  {
+    slug: "toronto",
+    name: "Toronto",
+    region: "ON",
+    descriptor: "a dense urban market where apartments, restaurants, offices, and homes can experience year-round pest pressure",
+  },
+  {
     slug: "scarborough",
     name: "Scarborough",
     region: "ON",
     descriptor: "an east Toronto service area with dense residential and commercial pest control demand",
   },
   {
-    slug: "durham-region",
-    name: "Durham Region",
+    slug: "mississauga",
+    name: "Mississauga",
     region: "ON",
-    descriptor: "the broader service area for homeowners, landlords, and businesses east of Toronto",
+    descriptor: "a major Peel and GTA market with residential towers, family homes, commercial kitchens, and industrial properties",
   },
+  {
+    slug: "gta",
+    name: "Greater Toronto Area",
+    region: "ON",
+    schemaType: "AdministrativeArea",
+    descriptor: "the broader GTA service area for priority pest control across homes, businesses, and multi-unit properties",
+  },
+];
+
+const demandTiers = [
+  {
+    title: "Highest Demand",
+    items: ["Bed Bugs", "Mice", "Wasps & Yellowjackets", "Ants", "Cockroaches", "Spiders", "Rats", "Fleas"],
+  },
+  {
+    title: "Very Common",
+    items: [
+      "Carpenter ants",
+      "Pavement ants",
+      "Pharaoh ants",
+      "Cluster flies",
+      "Fruit flies",
+      "Drain flies",
+      "Mosquitoes",
+      "Earwigs",
+      "Silverfish",
+      "Carpet beetles",
+      "Pantry pests",
+      "House flies",
+      "Centipedes",
+      "Millipedes",
+    ],
+  },
+  {
+    title: "Seasonal Invaders",
+    items: ["Stink bugs", "Boxelder bugs", "Asian lady beetles", "Clover mites", "Ground beetles", "Sowbugs", "Pillbugs", "Crickets"],
+  },
+  {
+    title: "High-Value Specialty",
+    items: ["Carpenter bees", "Bird mites", "Bat bugs", "Rodent mites", "Clothes moths", "Wood-boring beetles", "Termites", "Dead animal-related flies"],
+  },
+];
+
+const marketingFocus = [
+  { label: "Bed Bugs", value: 35 },
+  { label: "Rodents", value: 20 },
+  { label: "Wasps", value: 15 },
+  { label: "Ants", value: 10 },
+  { label: "Cockroaches", value: 10 },
+  { label: "Spiders", value: 5 },
+  { label: "Other pests", value: 5 },
+];
+
+const pestGroups = [
+  { title: "Rodents", items: ["House mice", "Deer mice", "Norway rats", "Roof rats"] },
+  {
+    title: "Ants",
+    items: ["Carpenter ants", "Pavement ants", "Pharaoh ants", "Odorous house ants", "Argentine ants", "Acrobat ants", "Field ants", "Thief ants", "Moisture ants"],
+  },
+  {
+    title: "Cockroaches",
+    items: ["German cockroaches", "American cockroaches", "Oriental cockroaches", "Brown-banded cockroaches", "Smokybrown cockroaches", "Water bugs"],
+  },
+  { title: "Bed Bugs & Biting Pests", items: ["Bed bugs", "Bat bugs", "Bird mites", "Rodent mites", "Fleas", "Ticks", "Chiggers", "Mosquitoes"] },
+  {
+    title: "Wasps, Bees & Stinging Insects",
+    items: ["Paper wasps", "Yellowjackets", "Bald-faced hornets", "Mud daubers", "Ground wasps", "Carpenter bees", "Cicada killers"],
+  },
+  { title: "Flies", items: ["House flies", "Cluster flies", "Blow flies", "Fruit flies", "Drain flies", "Fungus gnats", "Carcass-related fly infestations"] },
+  {
+    title: "Beetles",
+    items: ["Carpet beetles", "Ground beetles", "Darkling beetles", "June beetles", "May beetles", "Wood-boring beetles", "Fungus beetles", "Dermestid beetles"],
+  },
+  { title: "Pantry & Fabric Pests", items: ["Indian meal moths", "Grain beetles", "Flour beetles", "Weevils", "Pantry moths", "Clothes moths", "Carpet beetles"] },
+  { title: "Crawling Insects", items: ["Silverfish", "Firebrats", "Earwigs", "Crickets", "Centipedes", "Millipedes", "Sowbugs", "Pillbugs", "Spiders"] },
+  { title: "Seasonal Invaders", items: ["Boxelder bugs", "Brown marmorated stink bugs", "Asian lady beetles", "Elm seed bugs", "Pine seed bugs", "Clover mites"] },
+  { title: "Moisture & Wood Pests", items: ["Psocids", "Booklice", "Mold mites", "Grain mites", "Termites", "Carpenter ants", "Carpenter bees", "Wood-boring beetles"] },
 ];
 
 const serviceBySlug = Object.fromEntries(services.map((service) => [service.slug, service]));
@@ -244,7 +811,7 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about/" },
   { label: "Services", href: "/services/" },
-  { label: "Areas", href: "/locations/oshawa/" },
+  { label: "Areas", href: "/locations/" },
   { label: "Contact", href: "/contact/" },
 ];
 
@@ -308,7 +875,7 @@ const localBusinessSchema = () => ({
     addressCountry: site.addressCountry,
   },
   areaServed: locations.map((location) => ({
-    "@type": "City",
+    "@type": location.schemaType || "City",
     name: `${location.name}, ${location.region}`,
   })),
   slogan: site.slogan,
@@ -359,10 +926,10 @@ const serviceSchema = (service, location) => ({
   },
   areaServed: location
     ? {
-        "@type": "City",
+        "@type": location.schemaType || "City",
         name: `${location.name}, ${location.region}`,
       }
-    : locations.map((item) => ({ "@type": "City", name: `${item.name}, ${item.region}` })),
+    : locations.map((item) => ({ "@type": item.schemaType || "City", name: `${item.name}, ${item.region}` })),
   description: service.intro,
 });
 
@@ -454,6 +1021,7 @@ const serviceCards = (items = services) => `
           <img src="${service.image}" alt="${service.alt}" loading="lazy" width="720" height="520">
           <span class="card-number">${String(index + 1).padStart(2, "0")}</span>
           <div class="service-card-content">
+            <div class="service-card-meta"><span>${service.demand}</span><span>${service.season}</span></div>
             <h3>${service.title}</h3>
             <p>${service.summary}</p>
           </div>
@@ -462,6 +1030,51 @@ const serviceCards = (items = services) => `
     )
     .join("")}
 </div>`;
+
+const demandOverview = () => `
+<div class="demand-grid">
+  ${demandTiers
+    .map(
+      (tier, index) => `
+      <article class="demand-card reveal">
+        <span>${String(index + 1).padStart(2, "0")}</span>
+        <h3>${tier.title}</h3>
+        <p>${tier.items.join(" / ")}</p>
+      </article>`,
+    )
+    .join("")}
+</div>`;
+
+const marketingFocusChart = () => `
+<div class="focus-chart reveal" aria-label="Recommended Ontario pest control marketing focus">
+  ${marketingFocus
+    .map(
+      (item) => `
+      <div class="focus-row">
+        <div><strong>${item.label}</strong><span>${item.value}%</span></div>
+        <i style="--value: ${item.value}%"></i>
+      </div>`,
+    )
+    .join("")}
+</div>`;
+
+const pestDirectory = () => `
+<div class="pest-directory">
+  ${pestGroups
+    .map(
+      (group) => `
+      <article class="pest-group reveal">
+        <h3>${group.title}</h3>
+        <p>${group.items.join(" / ")}</p>
+      </article>`,
+    )
+    .join("")}
+</div>`;
+
+const coveredPests = (service) =>
+  service.covers?.length
+    ? `<div class="covered-list"><h3>Also handles</h3><ul>${service.covers.map((item) => `<li>${item}</li>`).join("")}</ul></div>`
+    : "";
 
 const locationLinks = (service) => `
 <div class="location-grid">
@@ -501,7 +1114,7 @@ const quoteForm = (context = "Website inquiry") => `
     <label>Phone<input name="phone" type="tel" placeholder="905-000-0000"></label>
     <label>Service
       <select name="service" required>
-        <option value="">Select a service</option>
+      <option value="">Select a service</option>
         ${services.map((service) => `<option value="${service.slug}">${service.title}</option>`).join("")}
       </select>
     </label>
@@ -521,7 +1134,7 @@ const homePage = () => {
   const faqs = [
     {
       q: "What areas does Bugman Plus serve?",
-      a: "Bugman Plus is based in Oshawa and serves nearby communities including Whitby, Ajax, Pickering, Scarborough, and Durham Region.",
+      a: "Bugman Plus is based in Oshawa and serves Durham Region and GTA communities including Whitby, Ajax, Pickering, Toronto, Scarborough, Mississauga, and the Greater Toronto Area.",
     },
     {
       q: "Is there a warranty?",
@@ -536,7 +1149,7 @@ const homePage = () => {
   return shell({
     title: "Bugman Plus | Premium Pest Control in Oshawa & Durham Region",
     description:
-      "Bugman Plus provides premium pest control in Oshawa, Whitby, Ajax, Pickering, Scarborough, and Durham Region with service for bed bugs, rodents, ants, cockroaches, spiders, wasps, and more.",
+      "Bugman Plus provides premium pest control in Oshawa, Whitby, Ajax, Pickering, Toronto, Mississauga, Scarborough, Durham Region, and the GTA for bed bugs, rodents, wasps, ants, cockroaches, spiders, flies, pantry pests, and more.",
     path: "/",
     active: "home",
     schema: [localBusinessSchema(), webSiteSchema(), faqSchema(faqs)],
@@ -555,8 +1168,8 @@ const homePage = () => {
         </div>
         <div class="hero-metrics" aria-label="Bugman Plus highlights">
           <div><strong>3 mo</strong><span>Interior warranty</span></div>
-          <div><strong>6</strong><span>Core services</span></div>
-          <div><strong>5+</strong><span>Service areas</span></div>
+          <div><strong>${services.length}</strong><span>Priority services</span></div>
+          <div><strong>${locations.length}</strong><span>SEO service areas</span></div>
         </div>
       </section>
 
@@ -592,11 +1205,31 @@ const homePage = () => {
         </div>
       </section>
 
+      <section class="section market-section">
+        <div class="section-heading split reveal">
+          <div>
+            <p class="section-kicker">Ontario Pest Demand</p>
+            <h2>Built around the calls that matter most in the GTA and Durham Region.</h2>
+            <p>Priority service pages now follow the highest-intent pest categories for Ontario homeowners, landlords, food premises, offices, and commercial properties.</p>
+          </div>
+          <a class="text-link" href="/services/">See all services</a>
+        </div>
+        ${demandOverview()}
+        <div class="focus-panel">
+          <div class="focus-copy reveal">
+            <p class="section-kicker">Lead Focus</p>
+            <h3>Recommended marketing allocation</h3>
+            <p>Use bed bugs, rodents, wasps, ants, and cockroaches as the lead engines, then support them with spider and seasonal insect pages.</p>
+          </div>
+          ${marketingFocusChart()}
+        </div>
+      </section>
+
       <section class="section services-section">
         <div class="section-heading split reveal">
           <div>
             <p class="section-kicker">Services</p>
-            <h2>Targeted treatments for the pests that interrupt your space.</h2>
+            <h2>Twenty high-intent pest control services for Ontario search demand.</h2>
           </div>
           <a class="text-link" href="/services/">View all services</a>
         </div>
@@ -617,7 +1250,7 @@ const homePage = () => {
         <div class="section-heading reveal">
           <p class="section-kicker">Service Areas</p>
           <h2>Pest control coverage for every priority service area.</h2>
-          <p>Find focused pages for Oshawa, Whitby, Ajax, Pickering, Scarborough, and Durham Region.</p>
+          <p>Find focused pages for Oshawa, Whitby, Ajax, Pickering, Durham Region, Toronto, Scarborough, Mississauga, and the Greater Toronto Area.</p>
         </div>
         ${locationLinks()}
       </section>
@@ -694,9 +1327,9 @@ const aboutPage = () =>
 
 const servicesPage = () =>
   shell({
-    title: "Pest Control Services | Bugman Plus Oshawa",
+    title: "Pest Control Services | Bugman Plus Ontario & GTA",
     description:
-      "Explore Bugman Plus pest control services for bed bugs, spiders, wasps, cockroaches, ants, other insects, and rodents across Oshawa and Durham Region.",
+      "Explore 20 Bugman Plus pest control services for bed bugs, mice, rats, cockroaches, ants, wasps, spiders, fleas, mosquitoes, flies, pantry pests, silverfish, carpet beetles, earwigs, stink bugs, and more across Ontario and the GTA.",
     path: "/services/",
     active: "services",
     schema: [
@@ -709,12 +1342,36 @@ const servicesPage = () =>
         <img src="${assets.hero}" alt="Bugman Plus pest control service background" width="1800" height="1315">
         <div class="subhero-content reveal">
           <p class="eyebrow">Services</p>
-          <h1>Precision pest control for every pressure point.</h1>
-          <p>Choose the service that matches what you are seeing, then send the details for a focused quote.</p>
+          <h1>Precision pest control for Ontario's most searched pest problems.</h1>
+          <p>Choose the service that matches what you are seeing, then send the pest, property type, and location details for a focused quote.</p>
+        </div>
+      </section>
+      <section class="section market-section">
+        <div class="section-heading reveal">
+          <p class="section-kicker">Demand Tiers</p>
+          <h2>Service priorities for GTA, Durham Region, and southern Ontario properties.</h2>
+          <p>The exact percentages are a marketing planning model, while the pest categories align with Canadian public-health and professional pest-management guidance.</p>
+        </div>
+        ${demandOverview()}
+        <div class="focus-panel">
+          <div class="focus-copy reveal">
+            <p class="section-kicker">Marketing ROI</p>
+            <h3>Lead with the highest-intent services.</h3>
+            <p>Bed bugs and rodents should carry the most page depth, internal linking, and paid search effort, followed by wasps, ants, and cockroaches.</p>
+          </div>
+          ${marketingFocusChart()}
         </div>
       </section>
       <section class="section services-section">
         ${serviceCards()}
+      </section>
+      <section class="section pest-directory-section">
+        <div class="section-heading reveal">
+          <p class="section-kicker">Pests Treated</p>
+          <h2>A complete pest directory for broader organic reach.</h2>
+          <p>These groups support the core service pages with long-tail search language for Ontario homes, apartments, businesses, and food premises.</p>
+        </div>
+        ${pestDirectory()}
       </section>
       <section class="section location-section">
         <div class="section-heading reveal">
@@ -728,8 +1385,8 @@ const servicesPage = () =>
 
 const servicePage = (service) =>
   shell({
-    title: `${service.title} | Bugman Plus Pest Control Oshawa`,
-    description: `${service.intro} Available in Oshawa, Whitby, Ajax, Pickering, Scarborough, and Durham Region.`,
+    title: `${service.title} | Bugman Plus Pest Control Ontario & GTA`,
+    description: `${service.intro} Available in Oshawa, Whitby, Ajax, Pickering, Durham Region, Toronto, Scarborough, Mississauga, and the GTA.`,
     path: `/services/${service.slug}/`,
     active: "services",
     image: service.image,
@@ -748,7 +1405,7 @@ const servicePage = (service) =>
         <img src="${service.image}" alt="${service.alt}" width="1800" height="1200">
         <div class="subhero-content reveal">
           <p class="eyebrow">Pest Control Service</p>
-          <h1>${service.title} in Oshawa & Durham Region</h1>
+          <h1>${service.title} in Durham Region & the GTA</h1>
           <p>${service.intro}</p>
           <div class="hero-actions">
             <a class="button" href="/quote/?service=${service.slug}">Request ${service.shortTitle} Service</a>
@@ -768,6 +1425,7 @@ const servicePage = (service) =>
         <aside class="detail-aside reveal">
           <h3>Common signs</h3>
           <ul>${service.signs.map((sign) => `<li>${sign}</li>`).join("")}</ul>
+          ${coveredPests(service)}
           <a class="button button-wide" href="/quote/?service=${service.slug}">Get a Quote</a>
         </aside>
       </section>
@@ -791,14 +1449,14 @@ const servicePage = (service) =>
 const locationPage = (location) =>
   shell({
     title: `Pest Control in ${location.name}, ${location.region} | Bugman Plus`,
-    description: `Bugman Plus provides pest control in ${location.name}, ${location.region} for bed bugs, rodents, ants, cockroaches, spiders, wasps, and other insects.`,
+    description: `Bugman Plus provides pest control in ${location.name}, ${location.region} for bed bugs, mice, rats, cockroaches, ants, wasps, spiders, flies, pantry pests, and seasonal insects.`,
     path: `/locations/${location.slug}/`,
     active: "areas",
     schema: [
       localBusinessSchema(),
       breadcrumbSchema([
         { name: "Home", path: "/" },
-        { name: "Locations", path: "/locations/oshawa/" },
+        { name: "Locations", path: "/locations/" },
         { name: location.name, path: `/locations/${location.slug}/` },
       ]),
     ],
@@ -828,6 +1486,7 @@ const locationPage = (location) =>
                   <img src="${service.image}" alt="${service.alt}" loading="lazy" width="720" height="520">
                   <span class="card-number">${String(index + 1).padStart(2, "0")}</span>
                   <div class="service-card-content">
+                    <div class="service-card-meta"><span>${service.demand}</span><span>${service.season}</span></div>
                     <h3>${service.title}</h3>
                     <p>${service.summary}</p>
                   </div>
@@ -840,10 +1499,51 @@ const locationPage = (location) =>
     `,
   });
 
+const locationsPage = () =>
+  shell({
+    title: "Pest Control Service Areas | Bugman Plus Ontario & GTA",
+    description:
+      "Find Bugman Plus pest control service area pages for Oshawa, Whitby, Ajax, Pickering, Durham Region, Toronto, Scarborough, Mississauga, and the Greater Toronto Area.",
+    path: "/locations/",
+    active: "areas",
+    schema: [
+      localBusinessSchema(),
+      breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Locations", path: "/locations/" }]),
+    ],
+    children: `
+      <section class="subhero subhero-compact">
+        <img src="${assets.hero}" alt="Bugman Plus pest control service area background" width="1800" height="1315">
+        <div class="subhero-content reveal">
+          <p class="eyebrow">Service Areas</p>
+          <h1>Pest control across Durham Region and the GTA.</h1>
+          <p>Choose a location to find service pages for bed bugs, mice, rats, cockroaches, ants, wasps, spiders, flies, pantry pests, and seasonal invaders.</p>
+        </div>
+      </section>
+      <section class="section location-section">
+        <div class="section-heading reveal">
+          <p class="section-kicker">Locations</p>
+          <h2>Focused local pages for high-intent pest searches.</h2>
+          <p>Each area connects to the full 20-service catalog for stronger programmatic SEO coverage.</p>
+        </div>
+        ${locationLinks()}
+      </section>
+      <section class="section services-section">
+        <div class="section-heading split reveal">
+          <div>
+            <p class="section-kicker">Services</p>
+            <h2>Browse the pest control catalog by problem type.</h2>
+          </div>
+          <a class="text-link" href="/services/">View all services</a>
+        </div>
+        ${serviceCards(services.slice(0, 6))}
+      </section>
+    `,
+  });
+
 const locationServicePage = (location, service) =>
   shell({
     title: `${service.title} in ${location.name}, ${location.region} | Bugman Plus`,
-    description: `Need ${service.title.toLowerCase()} in ${location.name}, ${location.region}? Bugman Plus provides focused pest inspection and treatment programs with local service across Oshawa and Durham Region.`,
+    description: `Need ${service.title.toLowerCase()} in ${location.name}, ${location.region}? Bugman Plus provides focused pest inspection and treatment programs across Ontario, Durham Region, and the GTA.`,
     path: `/locations/${location.slug}/${service.slug}/`,
     active: "areas",
     image: service.image,
@@ -853,7 +1553,7 @@ const locationServicePage = (location, service) =>
       faqSchema(service.faq),
       breadcrumbSchema([
         { name: "Home", path: "/" },
-        { name: "Locations", path: "/locations/oshawa/" },
+        { name: "Locations", path: "/locations/" },
         { name: location.name, path: `/locations/${location.slug}/` },
         { name: service.title, path: `/locations/${location.slug}/${service.slug}/` },
       ]),
@@ -883,6 +1583,7 @@ const locationServicePage = (location, service) =>
         <aside class="detail-aside reveal">
           <h3>Common signs in ${location.name}</h3>
           <ul>${service.signs.map((sign) => `<li>${sign}</li>`).join("")}</ul>
+          ${coveredPests(service)}
           <a class="button button-wide" href="/quote/?service=${service.slug}&location=${location.slug}">Get a Quote</a>
         </aside>
       </section>
@@ -898,9 +1599,9 @@ const locationServicePage = (location, service) =>
 
 const contactPage = () =>
   shell({
-    title: "Contact Bugman Plus | Pest Control Oshawa",
+    title: "Contact Bugman Plus | Pest Control Ontario & GTA",
     description:
-      "Contact Bugman Plus for pest control in Oshawa and Durham Region. Call 905-924-2847 or email info@bugmanplus.com.",
+      "Contact Bugman Plus for pest control in Oshawa, Durham Region, Toronto, Mississauga, Scarborough, and the GTA. Call 905-924-2847 or email info@bugmanplus.com.",
     path: "/contact/",
     active: "contact",
     schema: [
@@ -935,7 +1636,7 @@ const quotePage = () =>
   shell({
     title: "Get a Pest Control Quote | Bugman Plus",
     description:
-      "Request a Bugman Plus pest control quote for Oshawa, Whitby, Ajax, Pickering, Scarborough, and Durham Region.",
+      "Request a Bugman Plus pest control quote for Oshawa, Whitby, Ajax, Pickering, Durham Region, Toronto, Scarborough, Mississauga, and the GTA.",
     path: "/quote/",
     active: "contact",
     schema: [
@@ -972,6 +1673,7 @@ ${paths
 `;
 
 const generatedPaths = ["/", "/about/", "/services/", "/contact/", "/quote/"];
+generatedPaths.push("/locations/");
 
 rmSync(outputRoot, { recursive: true, force: true });
 mkdirSync(outputRoot, { recursive: true });
@@ -980,6 +1682,7 @@ cpSync(join(root, "assets"), join(outputRoot, "assets"), { recursive: true });
 write("index.html", homePage());
 write("about/index.html", aboutPage());
 write("services/index.html", servicesPage());
+write("locations/index.html", locationsPage());
 write("contact/index.html", contactPage());
 write("quote/index.html", quotePage());
 

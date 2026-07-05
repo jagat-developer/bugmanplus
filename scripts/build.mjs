@@ -408,68 +408,68 @@ const services = [
         a: "They return when organic buildup, damp residues, produce, or waste areas continue to support breeding.",
       },
       {
-        q: "Is fruit fly control different from drain fly control?",
-        a: "Yes. Identification matters because the breeding source and treatment path can be different.",
+        q: "Does fruit fly control include other small flies?",
+        a: "Identification matters because small flies can come from produce, drains, waste areas, or damp organic buildup.",
       },
     ],
   },
   {
-    slug: "drain-fly-control",
-    title: "Drain Fly Control",
-    shortTitle: "Drain Flies",
+    slug: "boxelder-bug-control",
+    title: "Boxelder Bug Control",
+    shortTitle: "Boxelder Bugs",
     image: serviceImages.insect,
-    alt: "Service photo for drain fly control",
-    label: "Drain & fly service",
-    season: "All year",
-    intro:
-      "Drain fly inspection and treatment for floor drains, sink drains, mechanical rooms, restaurants, basements, and damp utility spaces.",
-    summary:
-      "Trace drain fly breeding to organic buildup, slow drains, moisture, and hard-to-clean wet zones.",
-    covers: ["Drain flies", "Moth flies", "Small fly pressure", "Moisture-related fly activity"],
-    signs: ["Tiny moth-like flies", "Activity near drains", "Flies in bathrooms", "Recurring damp-area sightings"],
-    process: [
-      "Inspect drains, traps, sump areas, cracked pipes, and wet organic buildup.",
-      "Treat breeding material and support the cleaning work needed to break the cycle.",
-      "Recommend moisture and maintenance steps to keep drains from rebuilding pressure.",
-    ],
-    faq: [
-      {
-        q: "Do drain flies always come from drains?",
-        a: "Often, but they can also come from other damp organic buildup, cracked plumbing, or wet utility spaces.",
-      },
-      {
-        q: "Will spraying the air solve drain flies?",
-        a: "No. The breeding source needs to be found and treated or the activity usually returns.",
-      },
-    ],
-  },
-  {
-    slug: "cluster-fly-control",
-    title: "Cluster Fly Control",
-    shortTitle: "Cluster Flies",
-    image: serviceImages.insect,
-    alt: "Service photo for cluster fly control",
-    label: "Seasonal fly service",
+    alt: "Service photo for boxelder bug control",
+    label: "Seasonal service",
     season: "Fall and spring",
     intro:
-      "Cluster fly service for attics, upper floors, windows, wall voids, and overwintering pressure in homes and cottages.",
+      "Boxelder bug control for sunny exterior walls, window frames, siding gaps, attic edges, and overwintering entry points.",
     summary:
-      "Treat and prevent seasonal fly pressure where cluster flies enter structures to overwinter and reappear when temperatures shift.",
-    covers: ["Cluster flies", "Blow flies", "Overwintering fly pressure"],
-    signs: ["Flies at sunny windows", "Activity in upper rooms", "Attic sightings", "Spring re-emergence"],
+      "Reduce boxelder bug entry pressure before seasonal invaders settle into protected spaces.",
+    covers: ["Boxelder bugs", "Seasonal invaders", "Overwintering exterior insects", "Window and siding pressure"],
+    signs: ["Bugs on sunny walls", "Fall exterior activity", "Spring indoor re-emergence", "Clusters near windows"],
     process: [
-      "Inspect upper walls, attic access, windows, siding gaps, and seasonal entry points.",
-      "Treat active or likely pressure zones with attention to timing.",
-      "Recommend sealing and exterior prevention before fall entry pressure builds.",
+      "Inspect sun-facing walls, window frames, siding gaps, soffits, and attic-edge entry points.",
+      "Treat selected exterior and entry zones at the right seasonal timing.",
+      "Recommend sealing and exclusion steps before fall entry pressure returns.",
     ],
     faq: [
       {
-        q: "Why do cluster flies appear in winter or spring?",
-        a: "They often overwinter in protected spaces and become visible indoors when warmth changes their activity.",
+        q: "Why do boxelder bugs gather on sunny walls?",
+        a: "They are attracted to warm exterior surfaces and often use nearby gaps to move toward protected overwintering spaces.",
       },
       {
-        q: "When should cluster fly prevention happen?",
-        a: "Prevention is strongest before fall entry pressure, but active indoor issues can still be assessed.",
+        q: "When is boxelder bug prevention best?",
+        a: "Late summer to fall prevention is usually best because boxelder bugs are trying to enter before winter.",
+      },
+    ],
+  },
+  {
+    slug: "tick-control",
+    title: "Tick Control",
+    shortTitle: "Ticks",
+    image: serviceImages.insect,
+    alt: "Service photo for tick control",
+    label: "Biting pest service",
+    season: "Spring to fall",
+    intro:
+      "Tick control for yard edges, shaded vegetation, pet-use areas, fence lines, trails, and exterior spaces where ticks may be picked up.",
+    summary:
+      "Reduce tick pressure around the outdoor zones people and pets use most often.",
+    covers: ["Ticks", "Deer ticks", "Biting pest pressure", "Yard-edge activity"],
+    signs: ["Ticks found on people or pets", "Activity near tall grass", "Wooded edge pressure", "Recurring bites after yard use"],
+    process: [
+      "Inspect lawn edges, shaded vegetation, fence lines, pet routes, and wooded transition zones.",
+      "Treat selected exterior areas where tick pressure is most likely to build.",
+      "Recommend mowing, vegetation, and pet-area changes that help reduce repeat exposure.",
+    ],
+    faq: [
+      {
+        q: "Where are ticks most common around a property?",
+        a: "Ticks are often picked up around tall grass, wooded edges, shaded vegetation, fence lines, and areas used by pets or wildlife.",
+      },
+      {
+        q: "Can tick service help protect pets and family areas?",
+        a: "Targeted exterior service can reduce pressure in common-use yard zones, especially when combined with vegetation and pet-area maintenance.",
       },
     ],
   },
@@ -504,32 +504,32 @@ const services = [
     ],
   },
   {
-    slug: "carpet-beetle-control",
-    title: "Carpet Beetle Control",
-    shortTitle: "Carpet Beetles",
+    slug: "beetle-control",
+    title: "Beetle Control",
+    shortTitle: "Beetles",
     image: serviceImages.insect,
-    alt: "Service photo for carpet beetle control",
-    label: "Fabric pest service",
+    alt: "Service photo for beetle control",
+    label: "Beetle service",
     season: "All year",
     intro:
-      "Carpet beetle inspection and treatment for closets, carpets, rugs, upholstery, stored fabrics, and hidden lint buildup.",
+      "Beetle inspection and treatment for carpet beetles, stored-product beetles, ground beetles, and recurring indoor beetle sightings.",
     summary:
-      "Find larval feeding areas and treat the cracks, textile zones, and storage conditions where carpet beetles persist.",
-    covers: ["Carpet beetles", "Dermestid beetles", "Fabric pest inspection"],
-    signs: ["Larvae or shed skins", "Damage to wool or fabrics", "Small beetles at windows", "Activity in closets"],
+      "Identify the beetle type, source conditions, and treatment areas needed to stop recurring activity.",
+    covers: ["Carpet beetles", "Ground beetles", "Stored-product beetles", "Dermestid beetles"],
+    signs: ["Small beetles at windows", "Larvae or shed skins", "Damage to stored products or fabrics", "Recurring crawling beetles"],
     process: [
-      "Inspect textile storage, rugs, closets, baseboards, vents, pet hair, and lint-heavy areas.",
-      "Treat selected harborages and feeding zones.",
-      "Recommend cleaning, laundering, storage, and monitoring steps to prevent recurrence.",
+      "Inspect windows, baseboards, storage areas, pantry goods, textile zones, vents, and likely source material.",
+      "Treat selected harborages, cracks, and feeding or entry zones.",
+      "Recommend cleaning, storage, exclusion, and monitoring steps to prevent recurrence.",
     ],
     faq: [
       {
-        q: "Do carpet beetles only live in carpets?",
-        a: "No. They can feed on natural fibers, lint, hair, feathers, stored textiles, and hidden debris.",
+        q: "Why am I seeing beetles at windows?",
+        a: "Some adult beetles are attracted to light and may appear at windows even when the source is elsewhere.",
       },
       {
-        q: "Why am I seeing beetles at windows?",
-        a: "Adults are attracted to light and may appear at windows even when larvae are feeding elsewhere.",
+        q: "Does beetle control depend on the species?",
+        a: "Yes. Carpet beetles, ground beetles, and stored-product beetles each point to different source conditions and treatment areas.",
       },
     ],
   },
@@ -624,32 +624,32 @@ const services = [
     ],
   },
   {
-    slug: "house-fly-control",
-    title: "House Fly Control",
-    shortTitle: "House Flies",
+    slug: "other-pests",
+    title: "Other Pests",
+    shortTitle: "Other Pests",
     image: serviceImages.insect,
-    alt: "Service photo for house fly control",
-    label: "Fly service",
-    season: "Spring to fall",
+    alt: "Service photo for other pest control",
+    label: "General pest service",
+    season: "As needed",
     intro:
-      "House fly control for restaurants, garbage rooms, kitchens, commercial sites, food-handling spaces, and homes.",
+      "General pest inspection and treatment for uncommon, seasonal, or hard-to-identify pest issues in homes and businesses.",
     summary:
-      "Identify breeding sources and sanitation gaps so fly treatment supports food safety, comfort, and prevention.",
-    covers: ["House flies", "Blow flies", "Fungus gnats", "Flies from dead animal sources"],
-    signs: ["Flies around waste", "Activity near food areas", "Flies at windows", "Recurring indoor fly pressure"],
+      "Start with identification, source tracking, and a practical treatment path for pests that do not fit a standard category.",
+    covers: ["Unidentified insects", "Seasonal invaders", "Occasional pests", "Specialty pest concerns"],
+    signs: ["Recurring sightings", "Unknown insects indoors", "Seasonal entry pressure", "Activity in storage or utility areas"],
     process: [
-      "Inspect waste handling, drains, doors, loading areas, food storage, and possible breeding sources.",
-      "Treat active fly pressure and support sanitation or exclusion improvements.",
-      "Recommend monitoring and maintenance steps for high-traffic commercial or residential spaces.",
+      "Inspect the affected rooms, exterior edges, moisture conditions, storage zones, and entry points.",
+      "Identify the pest whenever possible and match treatment to the source and activity pattern.",
+      "Recommend prevention, cleanup, storage, or exclusion steps based on what is found.",
     ],
     faq: [
       {
-        q: "Why do house flies keep coming back?",
-        a: "They often return when waste, organic residue, door gaps, or breeding sources remain active.",
+        q: "What if I do not know what pest I am seeing?",
+        a: "Bugman Plus can start with inspection and identification, then recommend the correct treatment path.",
       },
       {
-        q: "Can fly control help food businesses?",
-        a: "Yes. Professional fly control can support sanitation, monitoring, and prevention programs for food premises.",
+        q: "Can other pest service cover unusual seasonal issues?",
+        a: "Yes. This service is meant for occasional pests, seasonal invaders, and specialty concerns that need identification first.",
       },
     ],
   },
@@ -836,7 +836,7 @@ const serviceAreaGroups = [
 const pestConcernGroups = [
   {
     title: "Indoor Pest Problems",
-    items: ["Bed bugs", "Cockroaches", "Ants", "Silverfish", "Carpet beetles", "Pantry pests", "Drain flies"],
+    items: ["Bed bugs", "Cockroaches", "Ants", "Silverfish", "Beetles", "Pantry pests", "Boxelder bugs"],
   },
   {
     title: "Rodent Activity",
@@ -848,7 +848,7 @@ const pestConcernGroups = [
   },
   {
     title: "Seasonal & Specialty Pests",
-    items: ["Cluster flies", "Stink bugs", "Boxelder bugs", "Asian lady beetles", "Bird mites", "Bat bugs", "Wood-boring beetles"],
+    items: ["Ticks", "Stink bugs", "Boxelder bugs", "Asian lady beetles", "Bird mites", "Bat bugs", "Wood-boring beetles"],
   },
 ];
 
@@ -867,7 +867,7 @@ const pestGroups = [
     title: "Wasps, Bees & Stinging Insects",
     items: ["Paper wasps", "Yellowjackets", "Bald-faced hornets", "Mud daubers", "Ground wasps", "Carpenter bees", "Cicada killers"],
   },
-  { title: "Flies", items: ["House flies", "Cluster flies", "Blow flies", "Fruit flies", "Drain flies", "Fungus gnats", "Carcass-related fly infestations"] },
+  { title: "Flies", items: ["Fruit flies", "Small flies", "Blow flies", "Fungus gnats", "Carcass-related fly infestations"] },
   {
     title: "Beetles",
     items: ["Carpet beetles", "Ground beetles", "Darkling beetles", "June beetles", "May beetles", "Wood-boring beetles", "Fungus beetles", "Dermestid beetles"],

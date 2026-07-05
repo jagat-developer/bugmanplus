@@ -2,5 +2,47 @@
   "buildCommand": "npm run build",
   "outputDirectory": "public",
   "cleanUrls": true,
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/services/drain-fly-control/",
+      "destination": "/services/boxelder-bug-control/",
+      "permanent": true
+    },
+    {
+      "source": "/services/cluster-fly-control/",
+      "destination": "/services/tick-control/",
+      "permanent": true
+    },
+    {
+      "source": "/services/carpet-beetle-control/",
+      "destination": "/services/beetle-control/",
+      "permanent": true
+    },
+    {
+      "source": "/services/house-fly-control/",
+      "destination": "/services/other-pests/",
+      "permanent": true
+    },
+    {
+      "source": "/locations/:location/drain-fly-control/",
+      "destination": "/locations/:location/boxelder-bug-control/",
+      "permanent": true
+    },
+    {
+      "source": "/locations/:location/cluster-fly-control/",
+      "destination": "/locations/:location/tick-control/",
+      "permanent": true
+    },
+    {
+      "source": "/locations/:location/carpet-beetle-control/",
+      "destination": "/locations/:location/beetle-control/",
+      "permanent": true
+    },
+    {
+      "source": "/locations/:location/house-fly-control/",
+      "destination": "/locations/:location/other-pests/",
+      "permanent": true
+    }
+  ]
 }

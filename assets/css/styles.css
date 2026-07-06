@@ -1110,6 +1110,14 @@ p {
 
 .service-hero img {
   object-fit: contain;
+  padding: 120px max(var(--pad), 6vw) 78px;
+  background:
+    radial-gradient(circle at 72% 44%, rgba(255, 223, 0, 0.12), transparent 34%),
+    #060606;
+}
+
+.service-hero img {
+  object-fit: contain;
   object-position: right center;
   background: #050505;
   opacity: 0.62;
@@ -1473,6 +1481,10 @@ p {
     background:
       linear-gradient(90deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.62)),
       linear-gradient(180deg, rgba(0, 0, 0, 0.1), #050505 96%);
+  }
+
+  .service-hero img {
+    padding: 96px 18px 48px;
   }
 
   .hero h1 {

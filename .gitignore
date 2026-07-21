@@ -9,3 +9,5 @@ tmp-*.png
 .env
 .env.*
 !.env.example
+
+.vercel

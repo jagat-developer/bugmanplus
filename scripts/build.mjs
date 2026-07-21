@@ -900,6 +900,7 @@ const navItems = [
   { label: "About", href: "/about/" },
   { label: "Services", href: "/services/" },
   { label: "Areas", href: "/locations/" },
+  { label: "Blog", href: "/blog/" },
   { label: "Contact", href: "/contact/" },
 ];
 
@@ -917,9 +918,12 @@ const write = (path, content) => {
 };
 
 const pageUrl = (path) => `${site.url}${path === "/" ? "" : path}`;
+const isAbsoluteUrl = (value = "") => /^https?:\/\//i.test(String(value));
+const absoluteAssetUrl = (path = assets.hero) => (isAbsoluteUrl(path) ? path : `${site.url}${path}`);
 
 const buildHead = ({ title, description, path, image = assets.hero, schema = [] }) => {
   const canonical = pageUrl(path);
+  const imageUrl = absoluteAssetUrl(image);
   const jsonLd = schema.map((item) => `<script type="application/ld+json">${JSON.stringify(item)}</script>`).join("\n");
   return `<!doctype html>
 <html lang="en">
@@ -936,11 +940,11 @@ const buildHead = ({ title, description, path, image = assets.hero, schema = [] 
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="${site.url}${image}">
+  <meta property="og:image" content="${imageUrl}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
-  <meta name="twitter:image" content="${site.url}${image}">
+  <meta name="twitter:image" content="${imageUrl}">
   <link rel="preload" as="image" href="${assets.hero}">
   <link rel="stylesheet" href="/assets/css/styles.css">
   ${jsonLd}
@@ -1020,6 +1024,145 @@ const serviceSchema = (service, location) => ({
     : locations.map((item) => ({ "@type": item.schemaType || "City", name: `${item.name}, ${item.region}` })),
   description: service.intro,
 });
+
+const upliftConfig = {
+  baseUrl: (process.env.UPLIFTAI_API_BASE_URL || "https://api.upliftai.co").replace(/\/+$/, ""),
+  token: process.env.UPLIFTAI_TOKEN || process.env.UPLIFTAPI_TOKEN || process.env.UPLIFT_API_TOKEN || "",
+  status: process.env.UPLIFTAI_BLOG_STATUS || "PUBLISH",
+};
+
+const asArray = (value) => {
+  if (Array.isArray(value)) return value.filter(Boolean).map(String);
+  if (typeof value === "string") {
+    return value
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+  return [];
+};
+
+const stripHtml = (value = "") =>
+  String(value)
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const truncateText = (value = "", maxLength = 165) => {
+  const text = stripHtml(value);
+  if (text.length <= maxLength) return text;
+  const trimmed = text.slice(0, maxLength).replace(/\s+\S*$/, "");
+  return `${trimmed}...`;
+};
+
+const safeMediaUrl = (value = "", fallback = assets.hero) => {
+  const url = String(value || "").trim();
+  if (/^(https?:|\/)/i.test(url)) return url;
+  return fallback;
+};
+
+const normalizeBlog = (blog = {}) => {
+  const content = String(blog.content || "").trim();
+  const title = String(blog.title || "Bugman Plus Pest Control Guide").trim();
+  const excerpt = String(blog.excerpt || truncateText(content, 170)).trim();
+  const publishDate = blog.publishDate || blog.createdAt || blog.updatedAt || "";
+  const updatedAt = blog.freshness?.lastUpdatedAt || blog.updatedAt || blog.createdAt || publishDate;
+
+  return {
+    id: String(blog.id || blog.slug || title),
+    title,
+    slug: String(blog.slug || "").trim(),
+    excerpt: excerpt || "Practical pest control guidance from Bugman Plus.",
+    content,
+    status: String(blog.status || "PUBLISH"),
+    publishDate,
+    publishTime: blog.publishTime || "",
+    featuredImage: safeMediaUrl(blog.featuredImage),
+    categories: asArray(blog.categories),
+    tags: asArray(blog.tags),
+    seoScore: blog.seoScore,
+    createdAt: blog.createdAt || "",
+    updatedAt,
+    authorName: blog.authorName || site.name,
+    authorUrl: blog.authorUrl || site.url,
+    freshness: blog.freshness || null,
+    meta: blog.meta || {},
+    analytics: blog.analytics || null,
+    customFields: blog.customFields || {},
+  };
+};
+
+const blogSortDate = (blog) => {
+  const value = blog.publishDate || blog.updatedAt || blog.createdAt;
+  const time = Date.parse(value);
+  return Number.isNaN(time) ? 0 : time;
+};
+
+const fetchUpliftJson = async (path) => {
+  const response = await fetch(`${upliftConfig.baseUrl}/api/public/v1/${path}`, {
+    headers: {
+      Authorization: `Bearer ${upliftConfig.token}`,
+      Accept: "application/json",
+    },
+  });
+  const payload = await response.json().catch(() => ({}));
+
+  if (!response.ok || payload.success === false) {
+    const message = payload.error || `UpliftAI request failed with ${response.status}`;
+    throw new Error(message);
+  }
+
+  return payload.data || {};
+};
+
+const fetchUpliftBlogs = async () => {
+  if (!upliftConfig.token) {
+    return {
+      configured: false,
+      blogs: [],
+      error: "UPLIFTAI_TOKEN is not set.",
+    };
+  }
+
+  const limit = 100;
+  const summaries = [];
+  let page = 1;
+  let totalPages = 1;
+
+  do {
+    const params = new URLSearchParams({
+      page: String(page),
+      limit: String(limit),
+      status: upliftConfig.status,
+    });
+    const data = await fetchUpliftJson(`blogs?${params}`);
+    const pageBlogs = Array.isArray(data.blogs) ? data.blogs : [];
+    summaries.push(...pageBlogs.map(normalizeBlog).filter((blog) => blog.slug));
+    totalPages = Number(data.pagination?.totalPages || 1);
+    page += 1;
+  } while (page <= totalPages);
+
+  const uniqueSummaries = Array.from(new Map(summaries.map((blog) => [blog.slug, blog])).values());
+  const detailedBlogs = await Promise.all(
+    uniqueSummaries.map(async (summary) => {
+      try {
+        const data = await fetchUpliftJson(`blog/${encodeURIComponent(summary.slug)}`);
+        return normalizeBlog({ ...summary, ...(data.blog || {}) });
+      } catch (error) {
+        console.warn(`Could not fetch UpliftAI detail for ${summary.slug}: ${error.message}`);
+        return summary;
+      }
+    }),
+  );
+
+  return {
+    configured: true,
+    blogs: detailedBlogs.sort((a, b) => blogSortDate(b) - blogSortDate(a)),
+    error: "",
+  };
+};
 
 const header = (active = "") => `
 <header class="site-header" data-site-header>
@@ -1239,6 +1382,270 @@ const faqList = (faqs) => `
     )
     .join("")}
 </div>`;
+
+const formatBlogDate = (blog) => {
+  const value = blog.publishDate || blog.createdAt || blog.updatedAt;
+  if (!value) return "Bugman Plus Guide";
+  const date = new Date(String(value).includes("T") ? value : `${value}T12:00:00`);
+  if (Number.isNaN(date.getTime())) return "Bugman Plus Guide";
+  return new Intl.DateTimeFormat("en-CA", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  }).format(date);
+};
+
+const blogMetaLabel = (blog) => {
+  const category = blog.categories[0] || blog.meta?.articleSection || "Pest Control";
+  return `${formatBlogDate(blog)} / ${category}`;
+};
+
+const blogImageAlt = (blog) => `${blog.title} - Bugman Plus pest control article`;
+
+const safeUrl = (value = "") => {
+  const url = String(value).trim();
+  if (/^(https?:|mailto:|tel:|\/)/i.test(url)) return url;
+  return "#";
+};
+
+const sanitizeBlogHtml = (html = "") => {
+  const allowedTags = new Set([
+    "a",
+    "blockquote",
+    "br",
+    "code",
+    "em",
+    "figcaption",
+    "figure",
+    "h2",
+    "h3",
+    "h4",
+    "hr",
+    "i",
+    "img",
+    "li",
+    "ol",
+    "p",
+    "pre",
+    "strong",
+    "table",
+    "tbody",
+    "td",
+    "th",
+    "thead",
+    "tr",
+    "ul",
+  ]);
+
+  return String(html)
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<\/?([a-z0-9-]+)(\s[^>]*)?>/gi, (match, tagName, rawAttrs = "") => {
+      const tag = tagName.toLowerCase();
+      const closing = /^<\//.test(match);
+
+      if (!allowedTags.has(tag)) return "";
+      if (closing) return ["br", "hr", "img"].includes(tag) ? "" : `</${tag}>`;
+      if (tag === "br" || tag === "hr") return `<${tag}>`;
+
+      if (tag === "a") {
+        const href = rawAttrs.match(/\shref=(["'])(.*?)\1/i)?.[2] || "#";
+        return `<a href="${escapeHtml(safeUrl(href))}" target="_blank" rel="noopener">`;
+      }
+
+      if (tag === "img") {
+        const src = safeUrl(rawAttrs.match(/\ssrc=(["'])(.*?)\1/i)?.[2] || "");
+        if (src === "#") return "";
+        const alt = rawAttrs.match(/\salt=(["'])(.*?)\1/i)?.[2] || "";
+        return `<img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" loading="lazy">`;
+      }
+
+      return `<${tag}>`;
+    });
+};
+
+const blogContentHtml = (blog) => {
+  const content = blog.content || blog.excerpt;
+  if (!content) return `<p>${escapeHtml(blog.excerpt)}</p>`;
+  if (/<[a-z][\s\S]*>/i.test(content)) return sanitizeBlogHtml(content);
+
+  return String(content)
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .map((paragraph) => `<p>${escapeHtml(paragraph).replaceAll("\n", "<br>")}</p>`)
+    .join("");
+};
+
+const blogPills = (blog) => {
+  const pills = [...blog.categories, ...blog.tags].slice(0, 4);
+  return pills.length ? `<div class="blog-pills">${pills.map((pill) => `<span>${escapeHtml(pill)}</span>`).join("")}</div>` : "";
+};
+
+const blogCards = (blogs) => `
+<div class="blog-grid">
+  ${blogs
+    .map(
+      (blog) => `
+      <article class="blog-card reveal">
+        <a href="/blog/${blog.slug}/" aria-label="Read ${escapeHtml(blog.title)}">
+          <img src="${escapeHtml(blog.featuredImage)}" alt="${escapeHtml(blogImageAlt(blog))}" loading="lazy" width="720" height="480">
+          <div class="blog-card-content">
+            <p class="blog-meta">${escapeHtml(blogMetaLabel(blog))}</p>
+            <h3>${escapeHtml(blog.title)}</h3>
+            <p>${escapeHtml(blog.excerpt)}</p>
+            ${blogPills(blog)}
+          </div>
+        </a>
+      </article>`,
+    )
+    .join("")}
+</div>`;
+
+const blogUnavailableState = (blogData) => `
+<div class="blog-state reveal">
+  <p class="section-kicker">Blog</p>
+  <h2>Pest control articles are being prepared.</h2>
+  <p>${escapeHtml(blogData.configured ? "No published articles are available yet." : "Check back soon for Bugman Plus guides on pest activity, preparation, and prevention.")}</p>
+  <a class="button" href="/quote/">Request Service</a>
+</div>`;
+
+const blogIndexPage = (blogData) =>
+  shell({
+    title: "Pest Control Blog | Bugman Plus Durham Region & GTA",
+    description:
+      "Read Bugman Plus pest control guides for bed bugs, rodents, wasps, ants, cockroaches, spiders, flies, and seasonal pests across Durham Region and the GTA.",
+    path: "/blog/",
+    active: "blog",
+    bodyClass: "blog-page",
+    image: blogData.blogs[0]?.featuredImage || assets.hero,
+    schema: [
+      localBusinessSchema(),
+      breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Blog", path: "/blog/" }]),
+      {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        name: "Bugman Plus Pest Control Blog",
+        url: pageUrl("/blog/"),
+        publisher: {
+          "@type": "Organization",
+          name: site.name,
+          logo: absoluteAssetUrl(assets.logo),
+        },
+      },
+    ],
+    children: `
+      <section class="subhero subhero-compact blog-hero">
+        <img src="${assets.hero}" alt="Bugman Plus pest control blog background" width="1800" height="1315">
+        <div class="subhero-content reveal">
+          <p class="eyebrow">Pest Control Blog</p>
+          <h1>Field notes for smarter pest decisions.</h1>
+          <p>Practical Bugman Plus guidance for identifying pest pressure, choosing the right treatment path, and protecting Ontario homes and businesses.</p>
+        </div>
+      </section>
+      <section class="section blog-section">
+        <div class="section-heading split reveal">
+          <div>
+            <p class="section-kicker">Latest Articles</p>
+            <h2>Guides from the Bugman Plus knowledge base.</h2>
+            <p>Use these notes to spot early warning signs, prepare for service, and understand the pest pressure around your property.</p>
+          </div>
+          <a class="text-link" href="/quote/">Ask for help</a>
+        </div>
+        ${blogData.blogs.length ? blogCards(blogData.blogs) : blogUnavailableState(blogData)}
+      </section>
+    `,
+  });
+
+const blogPostingSchema = (blog) => ({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: blog.meta?.seoTitle || blog.title,
+  description: blog.meta?.seoDescription || blog.excerpt,
+  image: absoluteAssetUrl(blog.featuredImage || assets.hero),
+  datePublished: blog.publishDate || blog.createdAt || undefined,
+  dateModified: blog.updatedAt || blog.publishDate || undefined,
+  author: {
+    "@type": blog.authorName === site.name ? "Organization" : "Person",
+    name: blog.authorName,
+    url: blog.authorUrl || site.url,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: site.name,
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteAssetUrl(assets.logo),
+    },
+  },
+  mainEntityOfPage: pageUrl(`/blog/${blog.slug}/`),
+});
+
+const blogDetailPage = (blog, allBlogs) => {
+  const related = allBlogs.filter((item) => item.slug !== blog.slug).slice(0, 3);
+  const seoTitle = blog.meta?.seoTitle || `${blog.title} | Bugman Plus Blog`;
+  const seoDescription = blog.meta?.seoDescription || blog.excerpt;
+
+  return shell({
+    title: seoTitle,
+    description: seoDescription,
+    path: `/blog/${blog.slug}/`,
+    active: "blog",
+    bodyClass: "blog-page",
+    image: blog.featuredImage || assets.hero,
+    schema: [
+      localBusinessSchema(),
+      blogPostingSchema(blog),
+      breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Blog", path: "/blog/" },
+        { name: blog.title, path: `/blog/${blog.slug}/` },
+      ]),
+    ],
+    children: `
+      <article>
+        <section class="subhero blog-article-hero">
+          <img src="${escapeHtml(blog.featuredImage || assets.hero)}" alt="${escapeHtml(blogImageAlt(blog))}" width="1800" height="1200">
+          <div class="subhero-content reveal">
+            <p class="eyebrow">${escapeHtml(blogMetaLabel(blog))}</p>
+            <h1>${escapeHtml(blog.title)}</h1>
+            <p>${escapeHtml(blog.excerpt)}</p>
+          </div>
+        </section>
+        <section class="section blog-article-layout">
+          <div class="blog-article-body reveal">
+            <div class="blog-content">
+              ${blogContentHtml(blog)}
+            </div>
+          </div>
+          <aside class="blog-aside reveal">
+            <p class="section-kicker">Bugman Plus</p>
+            <h2>Need this pest handled?</h2>
+            <p>Send the pest type, location, and timing. Bugman Plus will help identify the right inspection or treatment path.</p>
+            ${blogPills(blog)}
+            <a class="button button-wide" href="/quote/">Request Service</a>
+            <a class="text-link" href="/blog/">Back to blog</a>
+          </aside>
+        </section>
+        ${
+          related.length
+            ? `<section class="section blog-section blog-related-section">
+                <div class="section-heading split reveal">
+                  <div>
+                    <p class="section-kicker">Keep Reading</p>
+                    <h2>More pest control guides.</h2>
+                  </div>
+                  <a class="text-link" href="/blog/">View all articles</a>
+                </div>
+                ${blogCards(related)}
+              </section>`
+            : ""
+        }
+      </article>
+    `,
+  });
+};
 
 const quoteForm = (context = "Website inquiry") => `
 <div class="quote-stack reveal">
@@ -1802,8 +2209,8 @@ ${paths
 </urlset>
 `;
 
-const generatedPaths = ["/", "/about/", "/services/", "/contact/", "/quote/"];
-generatedPaths.push("/locations/");
+const blogData = await fetchUpliftBlogs();
+const generatedPaths = ["/", "/about/", "/services/", "/locations/", "/blog/", "/contact/", "/quote/"];
 
 rmSync(outputRoot, { recursive: true, force: true });
 mkdirSync(outputRoot, { recursive: true });
@@ -1813,6 +2220,7 @@ write("index.html", homePage());
 write("about/index.html", aboutPage());
 write("services/index.html", servicesPage());
 write("locations/index.html", locationsPage());
+write("blog/index.html", blogIndexPage(blogData));
 write("contact/index.html", contactPage());
 write("quote/index.html", quotePage());
 
@@ -1834,6 +2242,12 @@ for (const location of locations) {
   }
 }
 
+for (const blog of blogData.blogs) {
+  const path = `/blog/${blog.slug}/`;
+  generatedPaths.push(path);
+  write(`blog/${blog.slug}/index.html`, blogDetailPage(blog, blogData.blogs));
+}
+
 write("sitemap.xml", buildSitemap(generatedPaths));
 write(
   "robots.txt",
@@ -1845,3 +2259,4 @@ Sitemap: ${site.url}/sitemap.xml
 );
 
 console.log(`Generated ${generatedPaths.length} pages in public/.`);
+console.log(`Generated ${blogData.blogs.length} blog article pages from UpliftAI.`);

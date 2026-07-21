@@ -4,6 +4,8 @@ public/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+preview-*.log
+tmp-*.png
 .env
 .env.*
 !.env.example

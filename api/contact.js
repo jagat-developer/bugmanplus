@@ -164,7 +164,7 @@ export default async function handler(req, res) {
 
     if (payload.phone) {
       if (!isValidPhone(payload.phone)) {
-        return res.status(400).json({ ok: false, message: "Please enter a valid 10-digit phone number." });
+        return res.status(400).json({ ok: false, message: "Please enter a valid Canadian 10-digit phone number. Dashes are optional." });
       }
 
       payload.phone = formatPhone(payload.phone);

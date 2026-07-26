@@ -133,7 +133,7 @@ const validateLeadForm = (form) => {
   const phoneInput = form.querySelector("input[name='phone']");
 
   if (phoneInput?.required && !isValidPhone(phoneInput.value)) {
-    phoneInput.setCustomValidity("Please enter a valid 10-digit phone number.");
+    phoneInput.setCustomValidity("Please enter a valid Canadian 10-digit phone number. Dashes are optional.");
   } else if (phoneInput) {
     phoneInput.setCustomValidity("");
   }

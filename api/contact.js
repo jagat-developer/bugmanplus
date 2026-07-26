@@ -1,5 +1,5 @@
 const requiredByType = {
-  quote: ["name", "email", "service", "location", "message"],
+  quote: ["name", "email", "phone", "service", "location", "message"],
   discount: ["email", "phone"],
   newsletter: ["email"],
 };
@@ -44,6 +44,25 @@ const normalizePayload = (body) =>
   );
 
 const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+const getPhoneDigits = (phone) => clean(phone).replace(/\D/g, "");
+
+const getTenDigitPhone = (phone) => {
+  const digits = getPhoneDigits(phone);
+
+  if (digits.length === 11 && digits.startsWith("1")) {
+    return digits.slice(1);
+  }
+
+  return digits;
+};
+
+const isValidPhone = (phone) => /^[2-9]\d{9}$/.test(getTenDigitPhone(phone));
+
+const formatPhone = (phone) => {
+  const digits = getTenDigitPhone(phone);
+  return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
+};
 
 const buildLeadText = (payload) =>
   Object.entries(labels)
@@ -141,6 +160,14 @@ export default async function handler(req, res) {
 
     if (!isValidEmail(payload.email)) {
       return res.status(400).json({ ok: false, message: "Please enter a valid email address." });
+    }
+
+    if (payload.phone) {
+      if (!isValidPhone(payload.phone)) {
+        return res.status(400).json({ ok: false, message: "Please enter a valid 10-digit phone number." });
+      }
+
+      payload.phone = formatPhone(payload.phone);
     }
 
     const deliveredBy = [];

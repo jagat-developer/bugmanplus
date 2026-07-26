@@ -1289,7 +1289,7 @@ const discountPopup = () => `
       <input type="hidden" name="context" value="5% discount registration">
       <label class="form-hp">Website<input name="website" type="text" autocomplete="off" tabindex="-1"></label>
       <label>Email<input name="email" type="email" placeholder="you@example.com" required></label>
-      <label>Phone<input name="phone" type="tel" placeholder="905-000-0000" required></label>
+      <label>Phone<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="905-000-0000" pattern="(?:\\+?1[ .-]?)?(?:\\([2-9][0-9]{2}\\)|[2-9][0-9]{2})[ .-]?[0-9]{3}[ .-]?[0-9]{4}" title="Enter a valid 10-digit phone number, such as 905-924-2847" required></label>
       <button class="button button-wide" type="submit">Claim 5% Discount</button>
       <p class="discount-note" data-discount-note></p>
     </form>
@@ -1709,7 +1709,7 @@ const quoteForm = (context = "Website inquiry") => `
     <div class="form-grid">
       <label>Name<input name="name" type="text" placeholder="Your name" required></label>
       <label>Email<input name="email" type="email" placeholder="you@example.com" required></label>
-      <label>Phone<input name="phone" type="tel" placeholder="905-000-0000"></label>
+      <label>Phone<input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="905-000-0000" pattern="(?:\\+?1[ .-]?)?(?:\\([2-9][0-9]{2}\\)|[2-9][0-9]{2})[ .-]?[0-9]{3}[ .-]?[0-9]{4}" title="Enter a valid 10-digit phone number, such as 905-924-2847" required></label>
       <label>Service
         <select name="service" required>
           <option value="">Select a service</option>

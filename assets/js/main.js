@@ -114,7 +114,36 @@ if (discountModal && !discountStorage.get()) {
   });
 }
 
+const getPhoneDigits = (value) => value.replace(/\D/g, "");
+
+const getTenDigitPhone = (value) => {
+  const digits = getPhoneDigits(value);
+  return digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
+};
+
+const isValidPhone = (value) => /^[2-9]\d{9}$/.test(getTenDigitPhone(value));
+
+document.querySelectorAll("input[name='phone']").forEach((input) => {
+  input.addEventListener("input", () => {
+    input.setCustomValidity("");
+  });
+});
+
+const validateLeadForm = (form) => {
+  const phoneInput = form.querySelector("input[name='phone']");
+
+  if (phoneInput?.required && !isValidPhone(phoneInput.value)) {
+    phoneInput.setCustomValidity("Please enter a valid 10-digit phone number.");
+  } else if (phoneInput) {
+    phoneInput.setCustomValidity("");
+  }
+
+  return form.reportValidity();
+};
+
 const submitLeadForm = async (form) => {
+  if (!validateLeadForm(form)) return;
+
   const note = form.querySelector("[data-form-note], [data-discount-note]");
   const submitButton = form.querySelector("button[type='submit']");
   const successMessage = form.dataset.successMessage || "Thanks. Bugman Plus received your request.";

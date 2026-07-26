@@ -1029,6 +1029,7 @@ const upliftConfig = {
   baseUrl: (process.env.UPLIFTAI_API_BASE_URL || "https://api.upliftai.co").replace(/\/+$/, ""),
   token: process.env.UPLIFTAI_TOKEN || process.env.UPLIFTAPI_TOKEN || process.env.UPLIFT_API_TOKEN || "",
   status: process.env.UPLIFTAI_BLOG_STATUS || "PUBLISH",
+  requireBlogs: String(process.env.UPLIFTAI_REQUIRE_BLOGS || "").toLowerCase() === "true",
 };
 
 const asArray = (value) => {
@@ -1100,11 +1101,11 @@ const blogSortDate = (blog) => {
   return Number.isNaN(time) ? 0 : time;
 };
 
-const fetchUpliftJson = async (path) => {
+const requestUpliftJson = async (path, headers = {}) => {
   const response = await fetch(`${upliftConfig.baseUrl}/api/public/v1/${path}`, {
     headers: {
-      Authorization: `Bearer ${upliftConfig.token}`,
       Accept: "application/json",
+      ...headers,
     },
   });
   const payload = await response.json().catch(() => ({}));
@@ -1115,6 +1116,32 @@ const fetchUpliftJson = async (path) => {
   }
 
   return payload.data || {};
+};
+
+const fetchUpliftJson = async ({ serverPath, tokenPath }) => {
+  const attempts = [
+    {
+      label: "token path",
+      path: tokenPath,
+      headers: {},
+    },
+    {
+      label: "bearer token",
+      path: serverPath,
+      headers: { Authorization: `Bearer ${upliftConfig.token}` },
+    },
+  ];
+  const errors = [];
+
+  for (const attempt of attempts) {
+    try {
+      return await requestUpliftJson(attempt.path, attempt.headers);
+    } catch (error) {
+      errors.push(`${attempt.label}: ${error.message}`);
+    }
+  }
+
+  throw new Error(errors.join(" | "));
 };
 
 const fetchUpliftBlogs = async () => {
@@ -1131,24 +1158,46 @@ const fetchUpliftBlogs = async () => {
   let page = 1;
   let totalPages = 1;
 
-  do {
-    const params = new URLSearchParams({
-      page: String(page),
-      limit: String(limit),
-      status: upliftConfig.status,
-    });
-    const data = await fetchUpliftJson(`blogs?${params}`);
-    const pageBlogs = Array.isArray(data.blogs) ? data.blogs : [];
-    summaries.push(...pageBlogs.map(normalizeBlog).filter((blog) => blog.slug));
-    totalPages = Number(data.pagination?.totalPages || 1);
-    page += 1;
-  } while (page <= totalPages);
+  try {
+    do {
+      const params = new URLSearchParams({
+        page: String(page),
+        limit: String(limit),
+        status: upliftConfig.status,
+      });
+      const data = await fetchUpliftJson({
+        serverPath: `blogs?${params}`,
+        tokenPath: `blogs/${encodeURIComponent(upliftConfig.token)}?${params}`,
+      });
+      const pageBlogs = Array.isArray(data.blogs) ? data.blogs : [];
+      summaries.push(...pageBlogs.map(normalizeBlog).filter((blog) => blog.slug));
+      totalPages = Number(data.pagination?.totalPages || 1);
+      page += 1;
+    } while (page <= totalPages);
+  } catch (error) {
+    const message = `UpliftAI blog fetch skipped: ${error.message}`;
+
+    if (upliftConfig.requireBlogs) {
+      throw new Error(message);
+    }
+
+    console.warn(message);
+    return {
+      configured: true,
+      blogs: [],
+      error: message,
+    };
+  }
 
   const uniqueSummaries = Array.from(new Map(summaries.map((blog) => [blog.slug, blog])).values());
   const detailedBlogs = await Promise.all(
     uniqueSummaries.map(async (summary) => {
       try {
-        const data = await fetchUpliftJson(`blog/${encodeURIComponent(summary.slug)}`);
+        const encodedSlug = encodeURIComponent(summary.slug);
+        const data = await fetchUpliftJson({
+          serverPath: `blog/${encodedSlug}`,
+          tokenPath: `blogs/${encodeURIComponent(upliftConfig.token)}/${encodedSlug}`,
+        });
         return normalizeBlog({ ...summary, ...(data.blog || {}) });
       } catch (error) {
         console.warn(`Could not fetch UpliftAI detail for ${summary.slug}: ${error.message}`);

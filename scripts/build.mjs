@@ -1,8 +1,9 @@
-import { cpSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { cpSync, mkdirSync, rmSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
 const root = process.cwd();
 const outputRoot = join(root, "public");
+const upliftCachePath = join(root, "data", "upliftai-blogs.json");
 const assetVersion = "20260706-bug-photos";
 const versionedAsset = (path) => `${path}?v=${assetVersion}`;
 const site = {
@@ -1144,12 +1145,45 @@ const fetchUpliftJson = async ({ serverPath, tokenPath }) => {
   throw new Error(errors.join(" | "));
 };
 
-const fetchUpliftBlogs = async () => {
-  if (!upliftConfig.token) {
+const readCachedUpliftBlogs = (reason) => {
+  try {
+    const payload = JSON.parse(readFileSync(upliftCachePath, "utf8"));
+    const cachedBlogs = Array.isArray(payload) ? payload : payload.blogs;
+    const blogs = Array.isArray(cachedBlogs)
+      ? cachedBlogs.map(normalizeBlog).filter((blog) => blog.slug)
+      : [];
+
+    if (!blogs.length) {
+      return null;
+    }
+
+    console.warn(`Using cached UpliftAI blogs${reason ? `: ${reason}` : ""}`);
     return {
       configured: false,
+      source: "cache",
+      blogs: blogs.sort((a, b) => blogSortDate(b) - blogSortDate(a)),
+      error: reason || "",
+    };
+  } catch (error) {
+    return null;
+  }
+};
+
+const fetchUpliftBlogs = async () => {
+  if (!upliftConfig.token) {
+    const message = "UPLIFTAI_TOKEN is not set.";
+    if (upliftConfig.requireBlogs) {
+      throw new Error(message);
+    }
+
+    const cached = readCachedUpliftBlogs(message);
+    if (cached) return cached;
+
+    return {
+      configured: false,
+      source: "none",
       blogs: [],
-      error: "UPLIFTAI_TOKEN is not set.",
+      error: message,
     };
   }
 
@@ -1176,14 +1210,17 @@ const fetchUpliftBlogs = async () => {
     } while (page <= totalPages);
   } catch (error) {
     const message = `UpliftAI blog fetch skipped: ${error.message}`;
-
     if (upliftConfig.requireBlogs) {
       throw new Error(message);
     }
 
+    const cached = readCachedUpliftBlogs(message);
+    if (cached) return cached;
+
     console.warn(message);
     return {
       configured: true,
+      source: "none",
       blogs: [],
       error: message,
     };
@@ -1208,6 +1245,7 @@ const fetchUpliftBlogs = async () => {
 
   return {
     configured: true,
+    source: "upliftai",
     blogs: detailedBlogs.sort((a, b) => blogSortDate(b) - blogSortDate(a)),
     error: "",
   };
@@ -2308,4 +2346,8 @@ Sitemap: ${site.url}/sitemap.xml
 );
 
 console.log(`Generated ${generatedPaths.length} pages in public/.`);
-console.log(`Generated ${blogData.blogs.length} blog article pages from UpliftAI.`);
+console.log(
+  `Generated ${blogData.blogs.length} blog article pages from ${
+    blogData.source === "cache" ? "cached UpliftAI data" : "UpliftAI"
+  }.`,
+);
